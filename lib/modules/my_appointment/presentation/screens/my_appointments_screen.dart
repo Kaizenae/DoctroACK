@@ -425,13 +425,14 @@ class MyAppointmentsCard extends StatelessWidget {
                             child: InkWell(
                               onTap: () {
                                 bottomSheetCustom(
-                                    height: AppSize.s100.h * 4,
-                                    context: context,
-                                    body: SummaryCardWidget(
-                                      advice: advice,
-                                      name: name,
-                                      clinicName: clinicName,
-                                    ));
+                                  height: AppSize.s100.h * 4,
+                                  context: context,
+                                  body: SummaryCardWidget(
+                                    advice: advice,
+                                    name: name,
+                                    clinicName: clinicName,
+                                  ),
+                                );
                               },
                               child: SvgPictureCustom(
                                 assetsName: IconAssets.sammary,
@@ -658,114 +659,111 @@ class SummaryCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: DefaultTextStyle(
-              style: const TextStyle(
-                color: CupertinoColors.black,
-                fontSize: 22.0,
-              ),
-              textAlign: TextAlign.center,
-              child: Padding(
-                padding: EdgeInsets.all(AppPadding.p12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                        child: TextCustom(
-                      text: LocaleKeys.summary,
-                      fontSize: FontSize.s20,
-                      fontWeight: FontWeightManager.bold,
-                    )),
-                    SizedBox(
-                      height: AppSize.s16.h,
+        DefaultTextStyle(
+            style: const TextStyle(
+              color: CupertinoColors.black,
+              fontSize: 22.0,
+            ),
+            textAlign: TextAlign.center,
+            child: Padding(
+              padding: EdgeInsets.all(AppPadding.p12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                      child: TextCustom(
+                    text: LocaleKeys.summary,
+                    fontSize: FontSize.s20,
+                    fontWeight: FontWeightManager.bold,
+                  )),
+                  SizedBox(
+                    height: AppSize.s16.h,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(AppPadding.p12),
+                    height: AppSize.s70.h,
+                    decoration: ShapeDecoration(
+                      color: ColorManager.white1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(60),
+                      ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(AppPadding.p12),
-                      height: AppSize.s70.h,
-                      decoration: ShapeDecoration(
-                        color: ColorManager.white1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60),
+                    child: Row(
+                      children: [
+                        SvgPictureCustom(
+                          assetsName: IconAssets.service1,
+                          color: ColorManager.brown,
+                          height: AppSize.s30.h,
+                          width: AppSize.s30.h,
                         ),
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPictureCustom(
-                            assetsName: IconAssets.service1,
-                            color: ColorManager.brown,
-                            height: AppSize.s30.h,
-                            width: AppSize.s30.h,
-                          ),
-                          RSizedBox.horizontal(AppSize.s24.h),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextCustom(
-                                text: name,
-                                textStyle: getMediumGilroyStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s16),
-                              ),
-                              RSizedBox.vertical(AppSize.s4.h),
-                              TextCustom(
-                                text: clinicName,
-                                textStyle: getRegularGilroyStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s12),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: AppSize.s16.h,
-                    ),
-                    TextCustom(
-                      text: LocaleKeys.advice,
-                      textStyle: getSemiBoldGilroyStyle(
-                          color: ColorManager.primary, fontSize: FontSize.s16),
-                    ),
-                    SizedBox(
-                      height: AppSize.s16.h,
-                    ),
-                    Column(
-                      children: advice.isNotEmpty
-                          ? List.generate(
-                              advice.length,
-                              (index) => Padding(
-                                padding:
-                                    EdgeInsets.only(bottom: AppPadding.p10),
-                                child: Row(
-                                  children: [
-                                    const SvgPictureCustom(
-                                      assetsName: IconAssets.check,
-                                      color: null,
-                                    ),
-                                    SizedBox(
-                                      width: AppSize.s10.w,
-                                    ),
-                                    TextCustom(
-                                      text: advice[index],
-                                      textStyle: TextStyle(
-                                        color: ColorManager.grey,
-                                        fontSize: FontSize.s12,
-                                        fontFamily: 'Gilroy',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: -0.24,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        RSizedBox.horizontal(AppSize.s24.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextCustom(
+                              text: name,
+                              textStyle: getMediumGilroyStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: FontSize.s16),
+                            ),
+                            RSizedBox.vertical(AppSize.s4.h),
+                            TextCustom(
+                              text: clinicName,
+                              textStyle: getRegularGilroyStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: FontSize.s12),
                             )
-                          : [],
-                    )
-                  ],
-                ),
-              )),
-        ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppSize.s16.h,
+                  ),
+                  TextCustom(
+                    text: LocaleKeys.advice,
+                    textStyle: getSemiBoldGilroyStyle(
+                        color: ColorManager.primary, fontSize: FontSize.s16),
+                  ),
+                  SizedBox(
+                    height: AppSize.s16.h,
+                  ),
+                  Column(
+                    children: advice.isNotEmpty
+                        ? List.generate(
+                            advice.length,
+                            (index) => Padding(
+                              padding: EdgeInsets.only(bottom: AppPadding.p10),
+                              child: Row(
+                                children: [
+                                  const SvgPictureCustom(
+                                    assetsName: IconAssets.check,
+                                    color: null,
+                                  ),
+                                  SizedBox(
+                                    width: AppSize.s10.w,
+                                  ),
+                                  TextCustom(
+                                    text: advice[index],
+                                    textStyle: TextStyle(
+                                      color: ColorManager.grey,
+                                      fontSize: FontSize.s12,
+                                      fontFamily: 'Gilroy',
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                      letterSpacing: -0.24,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : [],
+                  )
+                ],
+              ),
+            )),
         Padding(
           padding: EdgeInsets.only(bottom: AppPadding.p20),
           child: ElevatedButtonCustom(
@@ -967,8 +965,6 @@ dialog(BuildContext context) async {
                           height: 0.9),
                       onPressed: () {
                         cubit.createReviews();
-                        cubit.rate = '';
-                        cubit.note.clear();
                         // Navigator.pop(context);
                       },
                     )

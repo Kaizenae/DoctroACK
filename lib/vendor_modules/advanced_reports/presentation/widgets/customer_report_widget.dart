@@ -189,10 +189,10 @@ class CustomerReportWidget extends StatelessWidget {
                                   ? '${LocaleKeys.customer.tr()}/${LocaleKeys.day.tr()}'
                                   : '${LocaleKeys.customer.tr()}/${LocaleKeys.time.tr()}',
                               borderRadius: BorderRadius.circular(AppSize.s2),
-                              sortFieldValueMapper: (datum, index) {},
+                              // sortFieldValueMapper: (datum, index) {},
                               sortingOrder: SortingOrder.ascending,
-                              xAxisName: LocaleKeys.month,
-                              yAxisName: LocaleKeys.sales,
+                              // xAxisName: LocaleKeys.month,
+                              // yAxisName: LocaleKeys.sales,
                               color: ColorManager.secondary1),
                         ]),
                   ),

@@ -5,7 +5,6 @@ import 'package:doctor_ack/core/utils/values_manager.dart';
 import 'package:doctor_ack/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:doctor_ack/core/widgets/error_widget.dart';
 import 'package:doctor_ack/core/widgets/lock_role.dart';
-import '../../../../core/widgets/cached_image/cached_network_image.dart';
 import 'package:doctor_ack/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:doctor_ack/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:doctor_ack/core/widgets/shimmer_custom/shimmer_horizontal.dart';
@@ -75,7 +74,6 @@ class AdvancedReports extends StatelessWidget {
                           return switch (state) {
                             GetTopServicesSuccessState() => Container(
                                 // width: (AppSize.s100*3.43).w,
-                                height: (AppSize.s100 * 1.98).h,
                                 decoration: ShapeDecoration(
                                   color: const Color(0xFFF0FBFB),
                                   shape: RoundedRectangleBorder(
@@ -84,20 +82,17 @@ class AdvancedReports extends StatelessWidget {
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: AppPadding.p18,
-                                          vertical: AppPadding.p16),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                            child: TextCustom(
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: AppPadding.p18,
+                                            vertical: AppPadding.p16),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            TextCustom(
                                               text: LocaleKeys.topRatedService,
                                               maxLines: 2,
                                               overflow: TextOverflow.clip,
@@ -107,46 +102,34 @@ class AdvancedReports extends StatelessWidget {
                                                 height: 0,
                                               ),
                                             ),
-                                          ),
-                                          const RSizedBox.vertical(AppSize.s14),
-                                          SizedBox(
-                                            width: context.tablet
-                                                ? context.width -
-                                                    (AppSize.s100.w * 2).w
-                                                : AppSize.s100,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  const BouncingScrollPhysics(),
-                                              itemCount: state.topServicesEntity
-                                                  .resultEntity.response.length,
-                                              itemBuilder: (context, index) =>
-                                                  SummaryWidget(
-                                                      description: state
-                                                          .topServicesEntity
-                                                          .resultEntity
-                                                          .response[index]
-                                                          .name,
-                                                      color:
-                                                          ColorManager.divider,
-                                                      height: AppSize.s6),
-                                            ),
-                                          )
-                                        ],
+                                            const RSizedBox.vertical(
+                                                AppSize.s14),
+                                            SizedBox(
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                itemCount: state
+                                                    .topServicesEntity
+                                                    .resultEntity
+                                                    .response
+                                                    .length,
+                                                itemBuilder: (context, index) =>
+                                                    SummaryWidget(
+                                                        description: state
+                                                            .topServicesEntity
+                                                            .resultEntity
+                                                            .response[index]
+                                                            .name,
+                                                        color: ColorManager
+                                                            .divider,
+                                                        height: AppSize.s6),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: CachedNetworkImageCustom(
-                                            height: (AppSize.s100 * 1.5).h,
-                                            width: (AppSize.s100.w * 1.5).w,
-                                            boxFit: BoxFit.cover,
-                                            boarder: AppSize.s10,
-                                            url: state.topServicesEntity
-                                                .resultEntity.image),
-                                      ),
-                                    )
                                   ],
                                 ),
                               ),

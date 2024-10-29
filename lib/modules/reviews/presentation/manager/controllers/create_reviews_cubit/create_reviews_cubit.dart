@@ -17,7 +17,7 @@ class CreateReviewsCubit extends Cubit<CreateReviewsState> {
   static CreateReviewsCubit get(context) => BlocProvider.of(context);
 
   int serviceID = 0;
-  String rate = '';
+  String rate = '3.0';
   TextEditingController note = TextEditingController();
 
   Future<void> createReviews() async {

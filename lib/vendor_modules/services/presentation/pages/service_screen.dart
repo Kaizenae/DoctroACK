@@ -87,57 +87,90 @@ class ServiceScreen extends StatelessWidget {
                       SizedBox(
                         height: AppSize.s14.h,
                       ),
-                      CustomRadioButton(
-                        horizontal: false,
-                        enableShape: true,
-                        elevation: 0,
-                        // radius: AppSize.s10.r,
-                        // shapeRadius: AppSize.s10.r,
-                        autoWidth: true,
-                        // width: AppSize.s100*1.63,
-                        wrapAlignment: WrapAlignment.spaceBetween,
-                        enableButtonWrap: true,
-                        disabledColor: ColorManager.white,
+                      BlocProvider.value(
+                        value: BlocProvider.of<AvailableTimesCubit>(context)
+                          ..getAvailableTimes(),
+                        child: BlocConsumer<AvailableTimesCubit,
+                            AvailableTimesState>(
+                          listener: (context, state) {
+                            if (state is GetAvailableTimesErrorState) {
+                              showToast(
+                                context,
+                                message: LocaleKeys.toastValidDate.tr(),
+                                // color: ColorManager.primary,
+                                type: MessageType.error,
+                              );
+                            }
+                          },
+                          buildWhen: (previous, current) {
+                            var cubit = AvailableTimesCubit.get(context);
+                            return cubit.date.isNotEmpty;
+                          },
+                          builder: (context, state) {
+                            var availableCubit =
+                                AvailableTimesCubit.get(context);
+                            return CustomRadioButton(
+                              horizontal: false,
+                              enableShape: true,
+                              elevation: 0,
+                              // radius: AppSize.s10.r,
+                              // shapeRadius: AppSize.s10.r,
+                              autoWidth: true,
+                              // width: AppSize.s100*1.63,
+                              wrapAlignment: WrapAlignment.spaceBetween,
+                              enableButtonWrap: true,
+                              disabledColor: ColorManager.white,
 
-                        unSelectedBorderColor: ColorManager.divider,
-                        customShape: const StadiumBorder(
-                            side: BorderSide(
-                          color: ColorManager.divider,
-                        )),
-                        spacing: AppPadding.p16,
-                        margin: EdgeInsets.only(bottom: AppPadding.p16),
-                        unSelectedColor: ColorManager.white,
-                        disabledValues: const [2],
-                        buttonLables: [
-                          '08:00 - 09:00 ${LocaleKeys.am.tr()}',
-                          '09:00 - 10:00 ${LocaleKeys.am.tr()}',
-                          '10:00 - 11:00 ${LocaleKeys.am.tr()}',
-                          '11:00 - 12:00 ${LocaleKeys.am.tr()}',
-                          '12:00 - 01:00 ${LocaleKeys.pm.tr()}',
-                        ],
-                        buttonTextStyle: ButtonTextStyle(
-                            unSelectedColor: ColorManager.primary,
-                            disabledColor: ColorManager.divider,
-                            textStyle: TextStyle(
-                              color: ColorManager.primary,
-                              fontSize: FontSize.s12,
-                              fontFamily: 'Gilroy-SemiBold',
-                              fontWeight: FontWeightManager.semiBold,
-                              height: 0,
-                              letterSpacing: -0.24,
-                            ),
-                            selectedColor: ColorManager.white),
-                        buttonValues: const [
-                          1,
-                          2,
-                          3,
-                          4,
-                          5,
-                        ],
-                        defaultSelected: 1,
-                        // height: AppSize.s40,
-                        radioButtonValue: (value) {},
-                        selectedColor: ColorManager.primary,
+                              unSelectedBorderColor: ColorManager.divider,
+                              customShape: const StadiumBorder(
+                                  side: BorderSide(
+                                color: ColorManager.divider,
+                              )),
+                              spacing: AppPadding.p16,
+                              margin: EdgeInsets.only(bottom: AppPadding.p16),
+                              unSelectedColor: ColorManager.white,
+                              // disabledValues: const [2],
+                              buttonLables: state
+                                      is GetAvailableTimesSuccessState
+                                  ? List.generate(
+                                      state.availableTimesEntity.resultEntity
+                                          .response.length,
+                                      (index) =>
+                                          '${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].start)} - ${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].end)}')
+                                  : const [],
+                              buttonTextStyle: ButtonTextStyle(
+                                  unSelectedColor: ColorManager.primary,
+                                  disabledColor: ColorManager.divider,
+                                  textStyle: TextStyle(
+                                    color: ColorManager.primary,
+                                    fontSize: FontSize.s12,
+                                    fontFamily: 'Gilroy-SemiBold',
+                                    fontWeight: FontWeightManager.semiBold,
+                                    height: 0,
+                                    letterSpacing: -0.24,
+                                  ),
+                                  selectedColor: ColorManager.white),
+                              buttonValues:
+                                  state is GetAvailableTimesSuccessState
+                                      ? List.generate(
+                                          state.availableTimesEntity
+                                              .resultEntity.response.length,
+                                          (index) => state
+                                              .availableTimesEntity
+                                              .resultEntity
+                                              .response[index]
+                                              .start)
+                                      : const [],
+                              defaultSelected: null,
+                              // height: AppSize.s40,
+                              radioButtonValue: (value) {
+                                BlockTimeCubit.get(context).time =
+                                    availableCubit.convert24HourFormat(value);
+                              },
+                              selectedColor: ColorManager.primary,
+                            );
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: AppSize.s20.h,
@@ -162,208 +195,204 @@ class ServiceScreen extends StatelessWidget {
                     context: context,
                     body: Column(
                       children: [
-                        Expanded(
-                          child: DefaultTextStyle(
-                              style: const TextStyle(
-                                color: ColorManager.black,
-                                fontSize: 22.0,
-                              ),
-                              textAlign: TextAlign.center,
-                              child: Padding(
-                                padding: EdgeInsets.all(AppPadding.p12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                        child: TextCustom(
-                                      text: LocaleKeys.availableTimes,
+                        DefaultTextStyle(
+                            style: const TextStyle(
+                              color: ColorManager.black,
+                              fontSize: 22.0,
+                            ),
+                            textAlign: TextAlign.center,
+                            child: Padding(
+                              padding: EdgeInsets.all(AppPadding.p12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                      child: TextCustom(
+                                    text: LocaleKeys.availableTimes,
+                                    fontSize: FontSize.s18,
+                                    fontWeight: FontWeightManager.medium,
+                                  )),
+                                  SizedBox(
+                                    height: AppSize.s16.h,
+                                  ),
+                                  TextCustom(
+                                    text: LocaleKeys.selectDate,
+                                    textStyle: getSemiBoldGilroyStyle(
+                                      color: ColorManager.black,
                                       fontSize: FontSize.s18,
-                                      fontWeight: FontWeightManager.medium,
-                                    )),
-                                    SizedBox(
-                                      height: AppSize.s16.h,
                                     ),
-                                    TextCustom(
-                                      text: LocaleKeys.selectDate,
-                                      textStyle: getSemiBoldGilroyStyle(
-                                        color: ColorManager.black,
-                                        fontSize: FontSize.s18,
-                                      ),
+                                  ),
+                                  SizedBox(
+                                    height: AppSize.s14.h,
+                                  ),
+                                  SfDateRangePicker(
+                                    // onSelectionChanged: _onSelectionChanged,
+                                    selectionMode:
+                                        DateRangePickerSelectionMode.single,
+                                    backgroundColor: const Color(0xFFFBEEEE),
+                                    toggleDaySelection: true,
+                                    monthCellStyle:
+                                        DateRangePickerMonthCellStyle(
+                                      textStyle: getMediumGilroyStyle(
+                                          color: ColorManager.black),
                                     ),
-                                    SizedBox(
-                                      height: AppSize.s14.h,
-                                    ),
-                                    SfDateRangePicker(
-                                      // onSelectionChanged: _onSelectionChanged,
-                                      selectionMode:
-                                          DateRangePickerSelectionMode.single,
-                                      backgroundColor: const Color(0xFFFBEEEE),
-                                      toggleDaySelection: true,
-                                      monthCellStyle:
-                                          DateRangePickerMonthCellStyle(
-                                        textStyle: getMediumGilroyStyle(
-                                            color: ColorManager.black),
-                                      ),
-                                      headerStyle: DateRangePickerHeaderStyle(
-                                          backgroundColor: ColorManager.white,
-                                          textStyle: getSemiBoldGilroyStyle(
-                                              color: ColorManager.black,
-                                              fontSize: FontSize.s18),
-                                          textAlign: TextAlign.center),
-                                      showNavigationArrow: true,
+                                    headerStyle: DateRangePickerHeaderStyle(
+                                        backgroundColor: ColorManager.white,
+                                        textStyle: getSemiBoldGilroyStyle(
+                                            color: ColorManager.black,
+                                            fontSize: FontSize.s18),
+                                        textAlign: TextAlign.center),
+                                    showNavigationArrow: true,
 
-                                      selectionColor: ColorManager.secondary1,
-                                      initialSelectedRange: PickerDateRange(
-                                          DateTime.now().subtract(
-                                              const Duration(days: 4)),
-                                          DateTime.now()
-                                              .add(const Duration(days: 3))),
-                                      onSelectionChanged:
-                                          (dateRangePickerSelectionChangedArgs) {
-                                        var dateStamp =
-                                            dateRangePickerSelectionChangedArgs
-                                                .value
-                                                .toString()
-                                                .split(' ');
-                                        AvailableTimesCubit.get(context)
-                                                .serviceID =
-                                            state is GetServiceSuccessState
-                                                ? state.serviceEntity
-                                                    .resultEntity.response.id
-                                                : 0;
-                                        AvailableTimesCubit.get(context).date =
-                                            DateFormat('M/d/y').format(
-                                                DateTime.parse(dateStamp[0]));
-                                        BlockTimeCubit.get(context).date =
-                                            DateFormat('M/d/y').format(
-                                                DateTime.parse(dateStamp[0]));
+                                    selectionColor: ColorManager.secondary1,
+                                    initialSelectedRange: PickerDateRange(
+                                        DateTime.now()
+                                            .subtract(const Duration(days: 4)),
+                                        DateTime.now()
+                                            .add(const Duration(days: 3))),
+                                    onSelectionChanged:
+                                        (dateRangePickerSelectionChangedArgs) {
+                                      var dateStamp =
+                                          dateRangePickerSelectionChangedArgs
+                                              .value
+                                              .toString()
+                                              .split(' ');
+                                      AvailableTimesCubit.get(context)
+                                              .serviceID =
+                                          state is GetServiceSuccessState
+                                              ? state.serviceEntity.resultEntity
+                                                  .response.id
+                                              : 0;
+                                      AvailableTimesCubit.get(context).date =
+                                          DateFormat('M/d/y').format(
+                                              DateTime.parse(dateStamp[0]));
+                                      BlockTimeCubit.get(context).date =
+                                          DateFormat('M/d/y').format(
+                                              DateTime.parse(dateStamp[0]));
 
-                                        AvailableTimesCubit.get(context)
-                                            .getAvailableTimes();
+                                      AvailableTimesCubit.get(context)
+                                          .getAvailableTimes();
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: AppSize.s20.h,
+                                  ),
+                                  TextCustom(
+                                    text: LocaleKeys.blockTime,
+                                    textStyle: getSemiBoldGilroyStyle(
+                                      color: ColorManager.black,
+                                      fontSize: FontSize.s18,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: AppSize.s14.h,
+                                  ),
+                                  BlocProvider.value(
+                                    value: BlocProvider.of<AvailableTimesCubit>(
+                                        context)
+                                      ..getAvailableTimes(),
+                                    child: BlocConsumer<AvailableTimesCubit,
+                                        AvailableTimesState>(
+                                      listener: (context, state) {
+                                        if (state
+                                            is GetAvailableTimesErrorState) {
+                                          showToast(
+                                            context,
+                                            message:
+                                                LocaleKeys.toastValidDate.tr(),
+                                            // color: ColorManager.primary,
+                                            type: MessageType.error,
+                                          );
+                                        }
+                                      },
+                                      buildWhen: (previous, current) {
+                                        var cubit =
+                                            AvailableTimesCubit.get(context);
+                                        return cubit.date.isNotEmpty;
+                                      },
+                                      builder: (context, state) {
+                                        var availableCubit =
+                                            AvailableTimesCubit.get(context);
+                                        return CustomRadioButton(
+                                          horizontal: false,
+                                          enableShape: true,
+                                          elevation: 0,
+                                          // radius: AppSize.s10.r,
+                                          // shapeRadius: AppSize.s10.r,
+                                          autoWidth: true,
+                                          // width: AppSize.s100*1.63,
+                                          wrapAlignment:
+                                              WrapAlignment.spaceBetween,
+                                          enableButtonWrap: true,
+                                          disabledColor: ColorManager.white,
+
+                                          unSelectedBorderColor:
+                                              ColorManager.divider,
+                                          customShape: const StadiumBorder(
+                                              side: BorderSide(
+                                            color: ColorManager.divider,
+                                          )),
+                                          spacing: AppPadding.p16,
+                                          margin: EdgeInsets.only(
+                                              bottom: AppPadding.p16),
+                                          unSelectedColor: ColorManager.white,
+                                          // disabledValues: const [2],
+                                          buttonLables: state
+                                                  is GetAvailableTimesSuccessState
+                                              ? List.generate(
+                                                  state
+                                                      .availableTimesEntity
+                                                      .resultEntity
+                                                      .response
+                                                      .length,
+                                                  (index) =>
+                                                      '${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].start)} - ${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].end)}')
+                                              : const [],
+                                          buttonTextStyle: ButtonTextStyle(
+                                              unSelectedColor:
+                                                  ColorManager.primary,
+                                              disabledColor:
+                                                  ColorManager.divider,
+                                              textStyle: TextStyle(
+                                                color: ColorManager.primary,
+                                                fontSize: FontSize.s12,
+                                                fontFamily: 'Gilroy-SemiBold',
+                                                fontWeight:
+                                                    FontWeightManager.semiBold,
+                                                height: 0,
+                                                letterSpacing: -0.24,
+                                              ),
+                                              selectedColor:
+                                                  ColorManager.white),
+                                          buttonValues: state
+                                                  is GetAvailableTimesSuccessState
+                                              ? List.generate(
+                                                  state
+                                                      .availableTimesEntity
+                                                      .resultEntity
+                                                      .response
+                                                      .length,
+                                                  (index) => state
+                                                      .availableTimesEntity
+                                                      .resultEntity
+                                                      .response[index]
+                                                      .start)
+                                              : const [],
+                                          defaultSelected: null,
+                                          // height: AppSize.s40,
+                                          radioButtonValue: (value) {
+                                            BlockTimeCubit.get(context).time =
+                                                availableCubit
+                                                    .convert24HourFormat(value);
+                                          },
+                                          selectedColor: ColorManager.primary,
+                                        );
                                       },
                                     ),
-                                    SizedBox(
-                                      height: AppSize.s20.h,
-                                    ),
-                                    TextCustom(
-                                      text: LocaleKeys.blockTime,
-                                      textStyle: getSemiBoldGilroyStyle(
-                                        color: ColorManager.black,
-                                        fontSize: FontSize.s18,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: AppSize.s14.h,
-                                    ),
-                                    BlocProvider.value(
-                                      value:
-                                          BlocProvider.of<AvailableTimesCubit>(
-                                              context)
-                                            ..getAvailableTimes(),
-                                      child: BlocConsumer<AvailableTimesCubit,
-                                          AvailableTimesState>(
-                                        listener: (context, state) {
-                                          if (state
-                                              is GetAvailableTimesErrorState) {
-                                            showToast(
-                                              context,
-                                              message: LocaleKeys.toastValidDate
-                                                  .tr(),
-                                              // color: ColorManager.primary,
-                                              type: MessageType.error,
-                                            );
-                                          }
-                                        },
-                                        buildWhen: (previous, current) {
-                                          var cubit =
-                                              AvailableTimesCubit.get(context);
-                                          return cubit.date.isNotEmpty;
-                                        },
-                                        builder: (context, state) {
-                                          var availableCubit =
-                                              AvailableTimesCubit.get(context);
-                                          return CustomRadioButton(
-                                            horizontal: false,
-                                            enableShape: true,
-                                            elevation: 0,
-                                            // radius: AppSize.s10.r,
-                                            // shapeRadius: AppSize.s10.r,
-                                            autoWidth: true,
-                                            // width: AppSize.s100*1.63,
-                                            wrapAlignment:
-                                                WrapAlignment.spaceBetween,
-                                            enableButtonWrap: true,
-                                            disabledColor: ColorManager.white,
-
-                                            unSelectedBorderColor:
-                                                ColorManager.divider,
-                                            customShape: const StadiumBorder(
-                                                side: BorderSide(
-                                              color: ColorManager.divider,
-                                            )),
-                                            spacing: AppPadding.p16,
-                                            margin: EdgeInsets.only(
-                                                bottom: AppPadding.p16),
-                                            unSelectedColor: ColorManager.white,
-                                            // disabledValues: const [2],
-                                            buttonLables: state
-                                                    is GetAvailableTimesSuccessState
-                                                ? List.generate(
-                                                    state
-                                                        .availableTimesEntity
-                                                        .resultEntity
-                                                        .response
-                                                        .length,
-                                                    (index) =>
-                                                        '${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].start)} - ${availableCubit.convert24To12HourFormat(state.availableTimesEntity.resultEntity.response[index].end)}')
-                                                : const [],
-                                            buttonTextStyle: ButtonTextStyle(
-                                                unSelectedColor:
-                                                    ColorManager.primary,
-                                                disabledColor:
-                                                    ColorManager.divider,
-                                                textStyle: TextStyle(
-                                                  color: ColorManager.primary,
-                                                  fontSize: FontSize.s12,
-                                                  fontFamily: 'Gilroy-SemiBold',
-                                                  fontWeight: FontWeightManager
-                                                      .semiBold,
-                                                  height: 0,
-                                                  letterSpacing: -0.24,
-                                                ),
-                                                selectedColor:
-                                                    ColorManager.white),
-                                            buttonValues: state
-                                                    is GetAvailableTimesSuccessState
-                                                ? List.generate(
-                                                    state
-                                                        .availableTimesEntity
-                                                        .resultEntity
-                                                        .response
-                                                        .length,
-                                                    (index) => state
-                                                        .availableTimesEntity
-                                                        .resultEntity
-                                                        .response[index]
-                                                        .start)
-                                                : const [],
-                                            defaultSelected: null,
-                                            // height: AppSize.s40,
-                                            radioButtonValue: (value) {
-                                              BlockTimeCubit.get(context).time =
-                                                  availableCubit
-                                                      .convert24HourFormat(
-                                                          value);
-                                            },
-                                            selectedColor: ColorManager.primary,
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                        ),
+                                  ),
+                                ],
+                              ),
+                            )),
                         Padding(
                           padding: EdgeInsets.only(bottom: AppPadding.p20),
                           child: BlocBuilder<ServiceCubit, ServiceState>(

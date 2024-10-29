@@ -90,7 +90,7 @@ class ClinicRemoteDataSourceImpl implements ClinicRemoteDataSource {
         "start": start,
         "state": state,
         "wallet": wallet,
-        "strip_id":transId
+        "strip_id": transId
       }
     });
     return CreateModel.fromJson(response);

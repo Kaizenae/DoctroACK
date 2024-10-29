@@ -176,10 +176,9 @@ class SaleReportWidget extends StatelessWidget {
                             name:
                                 '${LocaleKeys.sales.tr()}/${LocaleKeys.month.tr()}',
                             // borderRadius: BorderRadius.circular(AppSize.s2),
-                            sortFieldValueMapper: (datum, index) {},
                             sortingOrder: SortingOrder.ascending,
-                            xAxisName: LocaleKeys.month,
-                            yAxisName: LocaleKeys.sales,
+                            // xAxisName: LocaleKeys.month,
+                            // yAxisName: LocaleKeys.sales,
                             color: ColorManager.primary)
                       ]),
                 GetAdvancedSalesErrorState() => ErrorsWidget(

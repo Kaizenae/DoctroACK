@@ -6,7 +6,6 @@ import 'package:doctor_ack/core/widgets/svg_pic/svg_pic.dart';
 import 'package:doctor_ack/core/widgets/text_custom/text_custom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/packages_imprts.dart';
 import '../../../../core/utils/values_manager.dart';
 
 class SummaryWidget extends StatelessWidget {
@@ -24,19 +23,22 @@ class SummaryWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: AppPadding.p8),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPictureCustom(
             height: height,
             assetsName: IconAssets.check,
             color: color!,
           ),
-          SizedBox(
-            width: AppSize.s8.w,
+          const SizedBox(
+            width: AppSize.s8,
           ),
-          TextCustom(
-            text: description,
-            textStyle:
-                getMediumGilroyStyle(color: color!, fontSize: FontSize.s14),
+          Expanded(
+            child: TextCustom(
+              text: description,
+              textStyle:
+                  getMediumGilroyStyle(color: color!, fontSize: FontSize.s14),
+            ),
           ),
         ],
       ),

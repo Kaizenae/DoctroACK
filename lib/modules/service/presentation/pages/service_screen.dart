@@ -96,20 +96,22 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                           color: ColorManager.black,
                                         )),
                                     const SizedBox(
-                                      width: AppSize.s20,
+                                      width: AppSize.s10,
                                     ),
-                                    TextCustom(
-                                      text: state.serviceEntity.resultEntity
-                                          .response.name,
-                                      textStyle: TextStyle(
-                                        fontSize: FontSize.s18,
-                                        fontFamily: 'Marcellus',
-                                        fontWeight: FontWeightManager.medium,
-                                        height: 0,
-                                        letterSpacing: -0.36,
+                                    Expanded(
+                                      child: TextCustom(
+                                        text: state.serviceEntity.resultEntity
+                                            .response.name,
+                                        overflow: TextOverflow.ellipsis,
+                                        textStyle: TextStyle(
+                                          fontSize: FontSize.s18,
+                                          fontFamily: 'Marcellus',
+                                          fontWeight: FontWeightManager.medium,
+                                          height: 0,
+                                          letterSpacing: -0.36,
+                                        ),
                                       ),
                                     ),
-                                    const Spacer(),
                                     BlocBuilder<ToggleCubit, ToggleState>(
                                       builder: (context, toggleState) {
                                         var toggleCubit =
@@ -147,52 +149,53 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                                 AddRemoveFavouritesCubit.get(
                                                     context);
                                             return InkWell(
-                                                onTap: () {
-                                                  removeFavCubit.id = state
-                                                      .serviceEntity
-                                                      .resultEntity
-                                                      .response
-                                                      .id;
-                                                  removeFavCubit.isClinic =
-                                                      false;
-                                                  removeFavCubit.endpoint = toggleCubit
-                                                          .isFavourite
-                                                      ? EndPoints
-                                                          .removeFavouriteEndpoint
-                                                      : EndPoints
-                                                          .addFavouriteEndpoint;
-                                                  toggleCubit.toggleFav();
+                                              onTap: () {
+                                                removeFavCubit.id = state
+                                                    .serviceEntity
+                                                    .resultEntity
+                                                    .response
+                                                    .id;
+                                                removeFavCubit.isClinic = false;
+                                                removeFavCubit
+                                                    .endpoint = toggleCubit
+                                                        .isFavourite
+                                                    ? EndPoints
+                                                        .removeFavouriteEndpoint
+                                                    : EndPoints
+                                                        .addFavouriteEndpoint;
+                                                toggleCubit.toggleFav();
 
-                                                  removeFavCubit
-                                                      .addRemoveFavourite();
-                                                },
-                                                child: Container(
-                                                    width: AppSize.s34.w,
-                                                    height: AppSize.s34.w,
-                                                    padding: EdgeInsets.all(
-                                                        AppPadding.p6),
-                                                    decoration: ShapeDecoration(
-                                                      color: Colors.white
-                                                          .withOpacity(
-                                                              0.6000000238418579),
-                                                      shape: const OvalBorder(),
-                                                    ),
-                                                    child: SvgPictureCustom(
-                                                      assetsName: toggleCubit
-                                                              .isFavourite
+                                                removeFavCubit
+                                                    .addRemoveFavourite();
+                                              },
+                                              child: Container(
+                                                width: AppSize.s34.w,
+                                                height: AppSize.s34.w,
+                                                padding: EdgeInsets.all(
+                                                    AppPadding.p6),
+                                                decoration: ShapeDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(
+                                                          0.6000000238418579),
+                                                  shape: const OvalBorder(),
+                                                ),
+                                                child: SvgPictureCustom(
+                                                  assetsName:
+                                                      toggleCubit.isFavourite
                                                           ? IconAssets.favorite
                                                           : IconAssets.heart,
-                                                      color: toggleCubit
-                                                              .isFavourite
-                                                          ? ColorManager.red
-                                                          : null,
-                                                    )));
+                                                  color: toggleCubit.isFavourite
+                                                      ? ColorManager.red
+                                                      : null,
+                                                ),
+                                              ),
+                                            );
                                           },
                                         );
                                       },
                                     ),
-                                    SizedBox(
-                                      width: AppSize.s10.w,
+                                    const SizedBox(
+                                      width: AppSize.s10,
                                     ),
                                     InkWell(
                                         onTap: () async {

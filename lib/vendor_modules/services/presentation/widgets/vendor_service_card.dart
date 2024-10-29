@@ -112,7 +112,7 @@ class VendorServiceCardWidget extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(AppPadding.p6),
                   width: (AppSize.s100 * 1.35).w,
-                  height: AppSize.s60.h * 1.25,
+                  height: AppSize.s60.h * 1.5,
                   decoration: BoxDecoration(
                     color: ColorManager.white,
                     borderRadius: BorderRadius.circular(AppSize.s10.r),

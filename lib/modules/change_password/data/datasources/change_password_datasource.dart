@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../../core/api/api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../forget_password/data/models/general_model.dart';
@@ -32,7 +30,6 @@ class ChangePasswordRemoteDataSourceImpl
         }
       },
     );
-    log(response.toString());
     return GeneralModel.fromJson(response);
   }
 }

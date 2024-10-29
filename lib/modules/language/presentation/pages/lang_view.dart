@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:doctor_ack/core/utils/assets_manager.dart';
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 import 'package:doctor_ack/core/utils/font_manager.dart';
@@ -120,7 +118,6 @@ class _SwitchListTileMenuItem extends StatelessWidget {
           //   text: subtitle,
           // ),
           onTap: () async {
-            log(locale.toString(), name: toString());
             await context.setLocale(locale); //BuildContext extension method
             SharedPreferences.getInstance().then((val) => val.setBool(
                 'ARABIC', locale.languageCode == 'ar' ? true : false));

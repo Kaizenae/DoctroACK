@@ -7,7 +7,6 @@ import '../../../../core/widgets/cached_image/cached_network_image.dart';
 import 'package:doctor_ack/core/widgets/refund_widget.dart';
 import 'package:doctor_ack/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:doctor_ack/core/widgets/shimmer_custom/shimmer_custom.dart';
-import 'package:doctor_ack/modules/clinic/presentaion/controllers/available_times_cubit/available_times_cubit.dart';
 import 'package:doctor_ack/modules/my_appointment/presentation/controllers/appointment_cubit/appointment_cubit.dart';
 import 'package:doctor_ack/modules/my_appointment/presentation/controllers/appointment_cubit/appointment_state.dart';
 import 'package:doctor_ack/modules/my_appointment/presentation/controllers/cancel_change_appointment_cubit/cancel_change_appointment_cubit.dart';
@@ -82,11 +81,8 @@ class _AppointmentServiceScreenState extends State<AppointmentServiceScreen> {
                                 bottom: AppSize.s30.h,
                                 right: AppSize.s70.w,
                                 child: CachedNetworkImageCustom(
-                                  url: state
-                                      .appointmentEntity
-                                      .resultEntity
-                                      .response
-                                      .icon,
+                                  url: state.appointmentEntity.resultEntity
+                                      .response.icon,
                                   width: (AppSize.s100 * 2.2),
                                   height: (AppSize.s100 * 1.6).h,
                                   boxFit: BoxFit.fill,
@@ -341,6 +337,7 @@ class _AppointmentServiceScreenState extends State<AppointmentServiceScreen> {
                                           var changeCubit =
                                               CancelChangeAppointmentsCubit.get(
                                                   context);
+
                                           return TextButton(
                                             onPressed: () {
                                               changeAppointmentDialog(
@@ -364,8 +361,12 @@ class _AppointmentServiceScreenState extends State<AppointmentServiceScreen> {
                                 ],
                               ),
                               TextCustom(
-                                text:
-                                    '${DateFormat.yMMMMEEEEd(AppConstants.language ? 'ar' : 'en').format(DateTime.parse(state.appointmentEntity.resultEntity.response.appointmentDate))} ${LocaleKeys.at.tr()} ${AvailableTimesCubit.get(context).convert24To12HourFormat(state.appointmentEntity.resultEntity.response.appointmentDate.split(' ')[1])}',
+                                text: DateFormat.yMMMMEEEEd().format(
+                                    DateTime.parse(state
+                                        .appointmentEntity
+                                        .resultEntity
+                                        .response
+                                        .appointmentDate)),
                                 textStyle: getMediumGilroyStyle(
                                   color: ColorManager.grey,
                                   fontSize: FontSize.s12,

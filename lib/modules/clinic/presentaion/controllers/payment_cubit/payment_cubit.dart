@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/utils/packages_imprts.dart';
@@ -31,7 +29,6 @@ class PaymentCubit extends Cubit<PaymentState> {
         'amount': amount,
         'currency': currency,
         "automatic_payment_methods[enabled]": "true",
-        "customer": "cus_PHFuUS4Xr0P0h6"
       };
 
       //Make post request to Stripe
@@ -62,17 +59,6 @@ class PaymentCubit extends Cubit<PaymentState> {
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  applePay: Platform.isIOS
-                      ? const PaymentSheetApplePay(
-                          merchantCountryCode: 'AE',
-                          buttonType: PlatformButtonType.pay,
-                        )
-                      : null,
-                  googlePay: PaymentSheetGooglePay(
-                      merchantCountryCode: 'AE',
-                      amount: price.toString(),
-                      currencyCode: 'AED',
-                      testEnv: false),
                   customFlow: false,
                   // billingDetails: const BillingDetails(
                   //     name: 'Ahmed Emad',

@@ -352,16 +352,21 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                TextCustom(
-                                                  text: state
-                                                      .searchServicesEntity
-                                                      .resultEntity
-                                                      .response[index]
-                                                      .name,
-                                                  fontSize: FontSize.s16,
-                                                  color: ColorManager.white,
-                                                  fontWeight:
-                                                      FontWeightManager.medium,
+                                                Expanded(
+                                                  child: TextCustom(
+                                                    text: state
+                                                        .searchServicesEntity
+                                                        .resultEntity
+                                                        .response[index]
+                                                        .name,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontSize: FontSize.s16,
+                                                    color: ColorManager.white,
+                                                    fontWeight:
+                                                        FontWeightManager
+                                                            .medium,
+                                                  ),
                                                 ),
                                                 Row(
                                                   children: [
@@ -395,14 +400,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: (AppSize.s100 * 2.2).w,
                                             child: TextCustom(
                                               text: state
                                                   .searchServicesEntity
                                                   .resultEntity
                                                   .response[index]
                                                   .description,
-                                              maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               textStyle: getSemiBoldGilroyStyle(
                                                 fontSize: FontSize.s12,

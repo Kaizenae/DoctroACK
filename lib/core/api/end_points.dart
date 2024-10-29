@@ -69,17 +69,16 @@ class EndPoints {
 //****************************************************************//Vendor Endpoints\\****************************************************\\
 
   static const String getClinicProfileEndpoint =
-      '${odooBaseUrl}get_clinc_profile';
+      '${odooBaseUrl}get_cli_profile';
   static const String getBankEndpoint = '${odooBaseUrl}get_bank_details';
-  static const String getUsersEndpoint = '${odooBaseUrl}get_clinic_users';
-  static const String getCustomersEndpoint =
-      '${odooBaseUrl}get_clinc_customers';
+  static const String getUsersEndpoint = '${odooBaseUrl}get_cli_users';
+  static const String getCustomersEndpoint = '${odooBaseUrl}get_cli_customers';
   static const String getFinancesEndpoint = '${odooBaseUrl}get_finances';
   static const String getCurrencyEndpoint = '${odooBaseUrl}get_all_currencies';
   static const String getStatesEndpoint = '${odooBaseUrl}get_state_list';
   static const String getBanksEndpoint = '${odooBaseUrl}get_all_banks';
   static const String getAppointmentsEndpoint =
-      '${odooBaseUrl}get_clinic_appointments';
+      '${odooBaseUrl}get_cli_appointments';
   static const String getAdvancedSalesEndpoint =
       '${odooBaseUrl}clinic_sales_report';
   static const String getAdvancedCustomersEndpoint =
