@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/media_query_values.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
