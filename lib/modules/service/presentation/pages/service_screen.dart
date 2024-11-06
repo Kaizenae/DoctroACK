@@ -1,5 +1,6 @@
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/constants_manager.dart';
+import 'package:doctor_ack/core/utils/dynamic_link.dart';
 import 'package:doctor_ack/core/utils/media_query_values.dart';
 import 'package:doctor_ack/core/utils/routes_manager.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
@@ -196,12 +197,24 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                     const SizedBox(
                                       width: AppSize.s10,
                                     ),
-                                    SvgPictureCustom(
-                                      assetsName: IconAssets.share,
-                                      color: null,
-                                      height: AppSize.s34.h,
-                                      width: AppSize.s34.h,
-                                    ),
+                                    InkWell(
+                                        onTap: () async {
+                                          // _onShare(context);
+                                          // print(await File(desiredDestinationPath).writeAsBytes( HelperFunctions.imageConverter(state.serviceEntity.resultEntity
+                                          //     .response.icon)))  ;
+
+                                          DynamicLinksHelper.createLink(
+                                              '${Routes.serviceClinicRoute}/${state.serviceEntity.resultEntity.response.id.toString()}',
+                                              state.serviceEntity.resultEntity
+                                                  .response.name,
+                                              'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
+                                        },
+                                        child: SvgPictureCustom(
+                                          assetsName: IconAssets.share,
+                                          color: null,
+                                          height: AppSize.s34.h,
+                                          width: AppSize.s34.h,
+                                        )),
                                   ],
                                 ),
                               ),

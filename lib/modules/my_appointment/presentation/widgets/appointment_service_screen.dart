@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/media_query_values.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
@@ -360,17 +362,34 @@ class _AppointmentServiceScreenState extends State<AppointmentServiceScreen> {
                                   )
                                 ],
                               ),
-                              TextCustom(
-                                text: DateFormat.yMMMMEEEEd().format(
-                                    DateTime.parse(state
-                                        .appointmentEntity
-                                        .resultEntity
-                                        .response
-                                        .appointmentDate)),
-                                textStyle: getMediumGilroyStyle(
-                                  color: ColorManager.grey,
-                                  fontSize: FontSize.s12,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextCustom(
+                                    text: DateFormat.yMMMMEEEEd().format(
+                                        DateTime.parse(state
+                                            .appointmentEntity
+                                            .resultEntity
+                                            .response
+                                            .appointmentDate)),
+                                    textStyle: getMediumGilroyStyle(
+                                      color: ColorManager.grey,
+                                      fontSize: FontSize.s12,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  TextCustom(
+                                    text:
+                                        "${DateTime.parse(state.appointmentEntity.resultEntity.response.appointmentDate).toString().split(" ")[1].split(":")[0].toString()}:${DateTime.parse(state.appointmentEntity.resultEntity.response.appointmentDate).toString().split(" ")[1].split(":")[1].toString()}",
+                                    textStyle: getMediumGilroyStyle(
+                                      color: ColorManager.grey,
+                                      fontSize: FontSize.s12,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
