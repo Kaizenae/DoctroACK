@@ -8,7 +8,7 @@
 PRODUCT_NAME = doctor_ack
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = come.doctorAck.doctorAck
+PRODUCT_BUNDLE_IDENTIFIER = com.doctorack.DoctorAck
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 come.doctorAck. All rights reserved.
