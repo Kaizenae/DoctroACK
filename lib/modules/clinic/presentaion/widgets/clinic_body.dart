@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/constants_manager.dart';
+import '../../../../core/utils/dynamic_link.dart';
 import '../../../../core/widgets/error_widget.dart';
 import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
 import '../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
@@ -866,21 +867,21 @@ class ClinicBody extends StatelessWidget {
                         width: AppSize.s10.w,
                       ),
                       InkWell(
-                          // onTap: state is GetClinicSuccessState
-                          //     ? () {
-                          //         DynamicLinksHelper.createLink(
-                          //             '${Routes.clinicRoute}/${state.clinicEntity.resultEntity.response.id.toString()}',
-                          //             state.clinicEntity.resultEntity.response
-                          //                 .name,
-                          //             'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
-                          //       }
-                          //     : null,
+                          onTap: state is GetClinicSuccessState
+                              ? () {
+                                  DynamicLinksHelper.createLink(
+                                      '${Routes.clinicRoute}/${state.clinicEntity.resultEntity.response.id.toString()}',
+                                      state.clinicEntity.resultEntity.response
+                                          .name,
+                                      'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
+                                }
+                              : null,
                           child: SvgPictureCustom(
-                        assetsName: IconAssets.share,
-                        color: null,
-                        height: AppSize.s34.h,
-                        width: AppSize.s34.h,
-                      )),
+                            assetsName: IconAssets.share,
+                            color: null,
+                            height: AppSize.s34.h,
+                            width: AppSize.s34.h,
+                          )),
                     ],
                   ),
                 )

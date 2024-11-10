@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '518385848200',
     projectId: 'doctorack',
     storageBucket: 'doctorack.appspot.com',
-    iosBundleId: 'come.doctorAck.doctorAck',
+    iosBundleId: 'com.doctorack.DoctorAck',
   );
 }

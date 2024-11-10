@@ -9,13 +9,11 @@ import 'package:doctor_ack/core/utils/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc_observer.dart';
 import 'core/api/dio_helper.dart';
@@ -74,20 +72,9 @@ Future<void> main() async {
   AppConstants.expireToken =
       CacheHelper.get(key: AppStrings.cachedExpireToken) ?? '';
   AppConstants.type = CacheHelper.get(key: AppStrings.cachedType) ?? '';
-  if (kReleaseMode) {
-    await SentryFlutter.init((options) {
-      options.dsn =
-          'https://d461b5b7ccb2e8a638fc34752646aae4@o4508261527191552.ingest.us.sentry.io/4508261538988032';
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
-      // We recommend adjusting this value in production.
-      options.tracesSampleRate = 0.01;
-      // The sampling rate for profiling is relative to tracesSampleRate
-      // Setting to 1.0 will profile 100% of sampled transactions:
-    },
-        appRunner: () => runApp(EasyLocalization(
-            supportedLocales: L10n.all,
-            path: 'assets/languages',
-            fallbackLocale: L10n.all[0],
-            child: const DoctorAckApp())));
-  }
+  runApp(EasyLocalization(
+      supportedLocales: L10n.all,
+      path: 'assets/languages',
+      fallbackLocale: L10n.all[0],
+      child: const DoctorAckApp()));
 }
