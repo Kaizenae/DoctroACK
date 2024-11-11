@@ -13,11 +13,9 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/packages_imprts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
-import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../modules/clinic/presentaion/controllers/available_times_cubit/available_times_cubit.dart';
 import '../../../../modules/clinic/presentaion/controllers/available_times_cubit/available_times_state.dart';
 import '../../../../modules/clinic/presentaion/widgets/service_data_widget.dart';
