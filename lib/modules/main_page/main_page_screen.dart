@@ -1,4 +1,4 @@
-import 'package:doctor_ack/core/controller/firebase_api.dart';
+// import 'package:doctor_ack/core/controller/firebase_api.dart';
 import 'package:doctor_ack/core/utils/font_manager.dart';
 import 'package:doctor_ack/core/utils/media_query_values.dart';
 import 'package:doctor_ack/core/utils/values_manager.dart';
@@ -10,7 +10,7 @@ import 'package:doctor_ack/modules/profile/presentation/screens/profile_screen.d
 import 'package:doctor_ack/modules/search/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/packages_imprts.dart';
-import '../../core/controller/firebase_provider.dart';
+// import '../../core/controller/firebase_provider.dart';
 import '../../core/utils/assets_manager.dart';
 import '../../core/utils/color_manager.dart';
 import '../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -28,9 +28,9 @@ class MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    NotificationListenerProvider().getMessage(context);
-    setupFlutterNotifications();
-    initFcm();
+    // NotificationListenerProvider().getMessage(context);
+    // setupFlutterNotifications();
+    // initFcm();
   }
 
   final _screens = [

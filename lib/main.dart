@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:doctor_ack/core/app.dart';
 import 'package:doctor_ack/core/controller/database_helper.dart';
-import 'package:doctor_ack/core/controller/firebase_api.dart';
+// import 'package:doctor_ack/core/controller/firebase_api.dart';
 import 'package:doctor_ack/core/local/cache_helper.dart';
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 import 'package:doctor_ack/core/utils/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc_observer.dart';
 import 'core/api/dio_helper.dart';
-import 'firebase_option.dart';
+// import 'firebase_option.dart';
 import 'injection_container.dart' as di;
 
 class L10n {
@@ -51,17 +51,17 @@ Future<void> main() async {
   await CacheHelper.init();
   await DioHelper.init();
   await DatabaseHelper.initializeDatabase();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  initFcm();
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // initFcm();
 
   SharedPreferences.getInstance().then((val) {
     AppConstants.language = val.getBool('ARABIC') ?? false;

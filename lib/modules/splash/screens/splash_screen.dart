@@ -2,7 +2,7 @@
 
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/packages_imprts.dart';
+// import '../../../../../../core/utils/packages_imprts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/utils/color_manager.dart';
@@ -10,7 +10,7 @@ import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/routes_manager.dart';
 import '../../../core/widgets/component.dart';
 import '../../../core/widgets/scaffold_custom/scaffold_custom.dart';
-import '../../user/presentation/controllers/users_cubit/users_cubit.dart';
+// import '../../user/presentation/controllers/users_cubit/users_cubit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -54,14 +54,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       backgroundColor: ColorManager.white,
-      body: BlocProvider.value(
-        value: BlocProvider.of<UsersCubit>(context)..updateNoTokenFun(),
-        child: Center(
-          child: Lottie.asset(ImageAssets.splashLogo, repeat: false
-              // onLoaded: (p0) => navigatorAndRemove(context, Routes.mainRoute),
-              ),
-        ),
+      body:
+          // BlocProvider.value(
+          // value: BlocProvider.of<UsersCubit>(context)..updateNoTokenFun(),
+          // child:
+          Center(
+        child: Lottie.asset(ImageAssets.splashLogo, repeat: false
+            // onLoaded: (p0) => navigatorAndRemove(context, Routes.mainRoute),
+            ),
       ),
+      // ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_ack/core/general_entities/notification_entity.dart';
 import 'package:doctor_ack/modules/forget_password/domain/entities/general_entity.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../../../../../core/utils/packages_imprts.dart';
 
 import '../../../../../core/error/failure.dart';
@@ -37,16 +37,16 @@ class UsersCubit extends Cubit<UsersStates> {
     });
   }
 
-  Future<void> updateNoTokenFun() async {
-    var deviceState = await FirebaseMessaging.instance.getToken();
+  // Future<void> updateNoTokenFun() async {
+  //   // var deviceState = await FirebaseMessaging.instance.getToken();
 
-    if (deviceState == null) return;
-    Either<Failure, GeneralEntity> response =
-        await updateNoTokenUsecase(StringParams(string: deviceState));
+  //   if (deviceState == null) return;
+  //   Either<Failure, GeneralEntity> response =
+  //       await updateNoTokenUsecase(StringParams(string: deviceState));
 
-    response.fold(
-        (failure) => failure.message, (createNoIdEntity) => createNoIdEntity);
-  }
+  //   response.fold(
+  //       (failure) => failure.message, (createNoIdEntity) => createNoIdEntity);
+  // }
 
   Future<void> deleteUserAccountFun() async {
     Either<Failure, GeneralEntity> response =

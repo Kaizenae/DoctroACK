@@ -36,19 +36,19 @@ class ServiceScreen extends StatelessWidget {
             text: state is GetServiceSuccessState
                 ? state.serviceEntity.resultEntity.response.name
                 : 'Hydra Facial',
-            actions: [
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.only(right: AppPadding.p16),
-                  child: SvgPictureCustom(
-                    assetsName: IconAssets.share,
-                    color: null,
-                    height: AppSize.s34.h,
-                    width: AppSize.s34.h,
-                  ),
-                ),
-              )
+            actions: const [
+              // InkWell(
+              //   onTap: () {},
+              //   child: Padding(
+              //     padding: EdgeInsets.only(right: AppPadding.p16),
+              //     child: SvgPictureCustom(
+              //       assetsName: IconAssets.share,
+              //       color: null,
+              //       height: AppSize.s34.h,
+              //       width: AppSize.s34.h,
+              //     ),
+              //   ),
+              // )
             ],
           ),
           body: SmartRefresher(

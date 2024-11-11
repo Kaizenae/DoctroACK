@@ -6,8 +6,8 @@ import 'package:doctor_ack/vendor_modules/vendor_clinic/presentaion/controllers/
 import 'package:doctor_ack/vendor_modules/vendor_clinic/presentaion/screens/vendor_clinic_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/packages_imprts.dart';
-import '../../core/controller/firebase_api.dart';
-import '../../core/controller/firebase_provider.dart';
+// import '../../core/controller/firebase_api.dart';
+// import '../../core/controller/firebase_provider.dart';
 import '../../core/utils/assets_manager.dart';
 import '../../core/utils/color_manager.dart';
 import '../../core/utils/constants_manager.dart';
@@ -31,9 +31,9 @@ class _VendorMainPageState extends State<VendorMainPage> {
   @override
   void initState() {
     super.initState();
-    NotificationListenerProvider().getMessage(context);
-    setupFlutterNotifications();
-    initFcm();
+    // NotificationListenerProvider().getMessage(context);
+    // setupFlutterNotifications();
+    // initFcm();
   }
 
   final _screens = [

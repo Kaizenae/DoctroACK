@@ -9,8 +9,8 @@ import 'package:doctor_ack/modules/clinic/presentaion/widgets/schedule_widgets/s
 import 'package:flutter/material.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/dynamic_link.dart';
-import '../../../../core/utils/routes_manager.dart';
+// import '../../../../core/utils/dynamic_link.dart';
+// import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/styles_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/refund_widget.dart';
@@ -30,30 +30,30 @@ class ScheduleScreen extends StatelessWidget {
       appBarCustom: AppBarCustom(
         centerTitle: false,
         text: ServiceCubit.get(context).serviceName,
-        actions: [
-          BlocBuilder<ServiceCubit, ServiceState>(
-            builder: (context, state) {
-              return InkWell(
-                onTap: state is GetServiceSuccessState
-                    ? () {
-                        DynamicLinksHelper.createLink(
-                            '${Routes.serviceClinicRoute}/${state.serviceEntity.resultEntity.response.id.toString()}',
-                            state.serviceEntity.resultEntity.response.name,
-                            'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
-                      }
-                    : null,
-                child: Padding(
-                  padding: EdgeInsets.only(right: AppPadding.p16),
-                  child: SvgPictureCustom(
-                    assetsName: IconAssets.share,
-                    color: null,
-                    height: AppSize.s34.h,
-                    width: AppSize.s34.h,
-                  ),
-                ),
-              );
-            },
-          )
+        actions: const [
+          // BlocBuilder<ServiceCubit, ServiceState>(
+          //   builder: (context, state) {
+          //     return InkWell(
+          //       // onTap: state is GetServiceSuccessState
+          //       //     ? () {
+          //       //         DynamicLinksHelper.createLink(
+          //       //             '${Routes.serviceClinicRoute}/${state.serviceEntity.resultEntity.response.id.toString()}',
+          //       //             state.serviceEntity.resultEntity.response.name,
+          //       //             'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
+          //       //       }
+          //       //     : null,
+          //       child: Padding(
+          //         padding: EdgeInsets.only(right: AppPadding.p16),
+          //         child: SvgPictureCustom(
+          //           assetsName: IconAssets.share,
+          //           color: null,
+          //           height: AppSize.s34.h,
+          //           width: AppSize.s34.h,
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // )
         ],
       ),
       body: SingleChildScrollView(

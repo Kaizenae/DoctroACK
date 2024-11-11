@@ -9,7 +9,7 @@ import 'package:doctor_ack/modules/clinic/presentaion/controllers/check_payment_
 import 'package:doctor_ack/modules/clinic/presentaion/controllers/payment_cubit/payment_cubit.dart';
 import 'package:doctor_ack/modules/favourite/presentation/controllers/toggle_cubit/toggle_cubit.dart';
 import 'package:doctor_ack/modules/reviews/presentation/manager/controllers/reviews_cubit/reviews_cubit.dart';
-import 'package:doctor_ack/modules/user/presentation/controllers/users_cubit/users_cubit.dart';
+// import 'package:doctor_ack/modules/user/presentation/controllers/users_cubit/users_cubit.dart';
 import 'package:doctor_ack/modules/webViews/controllers/web_view_cubit.dart';
 import 'package:doctor_ack/vendor_modules/advanced_reports/presentation/manager/filters_sorts_cubit/filters_sorts_cubit.dart';
 import 'package:doctor_ack/vendor_modules/edit_clinic/presentation/manager/states_cubit/states_cubit.dart';
@@ -22,6 +22,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../injection_container.dart';
 import '../modules/all_services/presentation/controllers/all_clinics_cubit/all_services_cubit.dart';
 import '../modules/search/presentation/controllers/locale_search_cubit/local_search_cubit.dart';
+import '../modules/user/presentation/controllers/users_cubit/users_cubit.dart';
 import 'controller/theme_controller/theme_cubit.dart';
 import 'controller/theme_controller/theme_state.dart';
 import 'utils/theme_manager.dart';
@@ -52,7 +53,7 @@ class _DoctorAckAppState extends State<DoctorAckApp> {
         BlocProvider(create: (context) => NotificationCubit()),
         BlocProvider(create: (context) => LocalSearchCubit()..initDatabase()),
         BlocProvider(create: (context) => sl<CheckPaymentCubit>()),
-        BlocProvider(create: (context) => sl<UsersCubit>()..updateNoTokenFun()),
+        BlocProvider(create: (context) => sl<UsersCubit>()),
         BlocProvider(create: (context) => sl<GetCategoriesCubit>()),
         BlocProvider(create: (context) => sl<ClinicCubit>()),
         BlocProvider(create: (context) => sl<ReviewsCubit>()),
