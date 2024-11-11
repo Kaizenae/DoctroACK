@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
-    <array>
+    	<array>
         <string>comgooglemaps</string>
         <string>baidumap</string>
         <string>iosamap</string>
@@ -43,6 +43,11 @@
         <string>tomtomgo</string>
         <string>copilot</string>
         <string>com.sygic.aura</string>
+        <string>http</string>
+        <string>https</string>
+        <string>sms</string>
+        <string>tel</string>
+        <string>mailto</string>
     </array>
 	<key>NSCameraUsageDescription</key>
     <string>DoctorAck requires access to the camera in order to enable users to capture and upload photos directly within the application. The camera functionality is essential for various features such as capturing images for profile pictures, uploading receipts, or scanning QR codes. Ensuring access to the camera enhances user experience and facilitates seamless interaction with the app's core functionalities.</string>
@@ -87,5 +92,10 @@
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ar</string>
+	</array>
 </dict>
 </plist>
