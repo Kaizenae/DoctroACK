@@ -858,7 +858,8 @@ dialog(BuildContext context) async {
                                 color: ColorManager.yellow,
                               ),
                               onRatingUpdate: (rating) {
-                                cubit.rate = rating.toString();
+                                cubit.rate =
+                                    rating.toString().replaceAll(".0", "");
                               },
                             ),
                           ),

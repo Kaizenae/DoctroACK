@@ -19,7 +19,6 @@ class SearchServicesRemoteDataSourceImpl
         await apiConsumer.get(EndPoints.searchServicesEndpoint, data: {
       "params": {"keyword": keyWord}
     });
-
     return SearchServicesModel.fromJson(response);
   }
 }

@@ -49,7 +49,6 @@ class ReviewsRemoteDataSourceImpl implements ReviewsRemoteDataSource {
         await apiConsumer.post(EndPoints.createReviewsEndpoint, body: {
       "params": {"service_id": serviceID, "rate": rate, "description": note}
     });
-
     return CreateModel.fromJson(response);
   }
 }
