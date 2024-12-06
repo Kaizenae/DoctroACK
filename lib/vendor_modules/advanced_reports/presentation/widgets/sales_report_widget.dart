@@ -122,10 +122,10 @@ class SaleReportWidget extends StatelessWidget {
                         value: SampleItem.lastmonth,
                         child: TextCustom(text: LocaleKeys.thisMonth),
                       ),
-                      const PopupMenuItem<SampleItem>(
-                        value: SampleItem.custom,
-                        child: TextCustom(text: 'Custom'),
-                      ),
+                      // const PopupMenuItem<SampleItem>(
+                      //   value: SampleItem.custom,
+                      //   child: TextCustom(text: 'Custom'),
+                      // ),
                     ],
                   ),
                 ],

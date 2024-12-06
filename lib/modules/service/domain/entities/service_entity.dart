@@ -25,7 +25,7 @@ class ResponseEntity extends Equatable {
   final int id;
   final int reviews;
   final double discount;
-  final String clinicID;
+  final int clinicID;
   final double price;
   final String name;
   final String icon;
@@ -36,6 +36,7 @@ class ResponseEntity extends Equatable {
   final List<String> notification;
   final bool favourite;
   final int maxScheduleDays;
+  final String clinicName;
 
   final List<WorkingDaysEntity> workingDays;
   final List<DoctorEntity> doctors;
@@ -48,6 +49,7 @@ class ResponseEntity extends Equatable {
     required this.price,
     required this.clinicID,
     required this.icon,
+    required this.clinicName,
     required this.favourite,
     required this.name,
     required this.city,

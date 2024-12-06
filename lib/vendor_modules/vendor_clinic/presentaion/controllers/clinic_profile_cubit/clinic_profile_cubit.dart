@@ -50,7 +50,6 @@ class VendorClinicCubit extends Cubit<ClinicProfileState> {
     IconAssets.contactUs,
     IconAssets.aboutUs,
     IconAssets.logout,
-    IconAssets.delete,
   ];
   final List<String> name = [
     LocaleKeys.editProfile,
@@ -64,7 +63,6 @@ class VendorClinicCubit extends Cubit<ClinicProfileState> {
     LocaleKeys.contactUs,
     LocaleKeys.aboutUs,
     LocaleKeys.logout,
-    LocaleKeys.delete,
   ];
   final List<String> routeName = [
     Routes.editClinicRoute,
@@ -77,7 +75,6 @@ class VendorClinicCubit extends Cubit<ClinicProfileState> {
     'null',
     Routes.contactUsRoute,
     Routes.aboutUSRoute,
-    'null',
     'null',
   ];
 

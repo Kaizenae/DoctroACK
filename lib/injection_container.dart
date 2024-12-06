@@ -18,9 +18,9 @@ Future<void> init() async {
 
   //********************************************// Blocs \\*************************************\\
   sl.registerLazySingleton<UsersCubit>(() => UsersCubit(
-      sendNotificationUsecase: sl(),
-      updateNoTokenUsecase: sl(),
-      deleteUserAccountUsecase: sl()));
+        sendNotificationUsecase: sl(),
+        updateNoTokenUsecase: sl(),
+      ));
 
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit(loginUsecase: sl()));
   sl.registerLazySingleton<RegisterCubit>(
@@ -37,8 +37,7 @@ Future<void> init() async {
         profileUsecase: sl(),
       ));
   sl.registerLazySingleton<EditProfileCubit>(() => EditProfileCubit(
-        editProfileUsecase: sl(),
-      ));
+      editProfileUsecase: sl(), deleteUserAccountUsecase: sl()));
   sl.registerLazySingleton<WalletCubit>(() => WalletCubit(
         walletUsecase: sl(),
       ));

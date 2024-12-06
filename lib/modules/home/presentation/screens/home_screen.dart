@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).unfocus();
     return const ScaffoldCustom(
         body: SingleChildScrollView(
       child: HomeBody(),

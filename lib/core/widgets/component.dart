@@ -21,8 +21,8 @@ Future<bool?> showToast(
 }) {
   return Fluttertoast.showToast(
     msg: message.tr(),
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.TOP,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 1,
     backgroundColor: type == MessageType.success
         ? ColorManager.primary
@@ -45,8 +45,8 @@ Future<bool?> showToast1({
 }) {
   return Fluttertoast.showToast(
     msg: message.tr(),
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.TOP,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 1,
     backgroundColor: type == MessageType.success
         ? ColorManager.primary

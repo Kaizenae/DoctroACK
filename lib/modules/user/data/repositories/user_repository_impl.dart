@@ -61,25 +61,4 @@ class UserRepositoryImpl implements UserRepository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
-
-  @override
-  Future<Either<Failure, GeneralEntity>> deleteUserAccount(
-      NoParams params) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remoteChangePassword =
-            await userRemoteDataSource.deleteUserAccount();
-        if (remoteChangePassword.generalEntity.status == true) {
-          // await  ChangePasswordLocalDataSource.cacheChangePassword(remoteChangePassword);
-          return Right(remoteChangePassword);
-        } else {
-          return Left(Failure(400, remoteChangePassword.generalEntity.message));
-        }
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
-      }
-    } else {
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
-    }
-  }
 }

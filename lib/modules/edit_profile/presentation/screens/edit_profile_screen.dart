@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:doctor_ack/core/utils/constants_manager.dart';
@@ -8,9 +10,11 @@ import 'package:doctor_ack/core/widgets/text_form_field/text_form_field_custom.d
 import 'package:doctor_ack/languages/locale_keys.g.dart';
 
 import '../../../../core/controller/helper_functions.dart';
+import '../../../../core/local/cache_helper.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/component.dart';
 import '../../../../core/widgets/cached_image/cached_network_image.dart';
@@ -19,6 +23,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
+import '../../../profile/presentation/screens/profile_component.dart';
 import '../cubit/edit_profile_cubit.dart';
 import '../cubit/edit_profile_state.dart';
 import '../../../../../core/utils/packages_imprts.dart';
@@ -316,7 +321,54 @@ class EditProfileScreen extends StatelessWidget {
                                         color: ColorManager.white,
                                         fontSize: FontSize.s18,
                                         height: 0.08),
-                                  )
+                                  ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ProfileComponent(
+                                name: LocaleKeys.delete,
+                                iconName: IconAssets.delete,
+                                screen: 'null',
+                                onTap: () {
+                                  dialogCustom(
+                                      pressEventOk: () async {
+                                        await EditProfileCubit.get(context)
+                                            .deleteUserAccountFun();
+                                        AppConstants.token = '';
+                                        AppConstants.expireToken = '';
+                                        AppConstants.type = '';
+                                        await CacheHelper.clearData().then(
+                                            (value) => navigatorAndRemove(
+                                                context, Routes.loginRoute));
+                                        // navigatorAndRemove(context, Routes.loginRoute);
+                                      },
+                                      context: context,
+                                      okButtonName: LocaleKeys.delete.tr(),
+                                      cancelButtonName: LocaleKeys.cancel.tr(),
+                                      body: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          TextCustom(
+                                            text: LocaleKeys.deleteAccount,
+                                            fontWeight:
+                                                FontWeightManager.semiBold,
+                                            fontSize: FontSize.s18,
+                                          ),
+                                          const RSizedBox.vertical(AppSize.s16),
+                                          TextCustom(
+                                            text:
+                                                LocaleKeys.deleteAccountWarning,
+                                            textAlign: TextAlign.center,
+                                            textStyle: getMediumGilroyStyle(
+                                              color: ColorManager.grey,
+                                              fontSize: FontSize.s14,
+                                            ),
+                                          ),
+                                          const RSizedBox.vertical(AppSize.s16),
+                                        ],
+                                      ));
+                                })
                           ],
                         ),
                       ),

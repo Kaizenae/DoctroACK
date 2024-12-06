@@ -27,13 +27,3 @@ class SendNotificationUsecase
           SendNotificationParams params) =>
       userRepository.sendNotification(params);
 }
-
-class DeleteUserAccountUsecase implements UseCase<GeneralEntity, NoParams> {
-  final UserRepository userRepository;
-
-  DeleteUserAccountUsecase(this.userRepository);
-
-  @override
-  Future<Either<Failure, GeneralEntity>> call(NoParams params) =>
-      userRepository.deleteUserAccount(params);
-}

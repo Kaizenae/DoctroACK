@@ -5,4 +5,5 @@ import '../../../../core/error/failure.dart';
 
 abstract class EditProfileRepository {
   Future<Either<Failure, GeneralEntity>> editProfile(EditProfileParams params);
+  Future<Either<Failure, GeneralEntity>> deleteUserAccount(NoParams params);
 }

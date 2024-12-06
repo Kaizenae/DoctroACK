@@ -116,9 +116,8 @@ class CategoriesScreen extends StatelessWidget {
                                         // width: AppSize.s100.w,
                                         boxFit: BoxFit.fitHeight,
                                         boarder: AppSize.s0,
-                                        url:
-                                            state.categoriesEntity.resultEntity
-                                                .response[index].icon),
+                                        url: state.categoriesEntity.resultEntity
+                                            .response[index].icon),
                                   ),
                                 ),
                                 Positioned(

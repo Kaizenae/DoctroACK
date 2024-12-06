@@ -300,52 +300,59 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                           SizedBox(
                             width: AppSize.s4.w,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: (AppSize.s100 * 2).w,
-                                child: TextCustom(
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  textStyle: TextStyle(
-                                    fontFamily: 'Gilroy',
-                                    fontSize: FontSize.s18,
-                                    fontWeight: FontWeightManager.medium,
-                                    height: 0,
-                                    letterSpacing: -0.36,
-                                  ),
-                                  text: state.serviceEntity.resultEntity
-                                      .response.clinicID,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  SvgPictureCustom(
-                                    height: AppSize.s14.h,
-                                    width: AppSize.s14.w,
-                                    assetsName: IconAssets.locationIcon,
-                                    color: ColorManager.grey,
-                                  ),
-                                  SizedBox(
-                                    width: AppSize.s4.w,
-                                  ),
-                                  TextCustom(
-                                    text: state.serviceEntity.resultEntity
-                                        .response.city,
+                          InkWell(
+                            onTap: () {
+                              ClinicCubit.get(context).clinicID = state
+                                  .serviceEntity.resultEntity.response.clinicID;
+                              navigator(context, Routes.clinicRoute);
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: (AppSize.s100 * 2).w,
+                                  child: TextCustom(
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                     textStyle: TextStyle(
                                       fontFamily: 'Gilroy',
-                                      fontSize: FontSize.s12,
-                                      color: ColorManager.grey,
-                                      fontWeight: FontWeightManager.regular,
+                                      fontSize: FontSize.s18,
+                                      fontWeight: FontWeightManager.medium,
+                                      height: 0,
+                                      letterSpacing: -0.36,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                                    text: state.serviceEntity.resultEntity
+                                        .response.clinicName,
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                Row(
+                                  children: [
+                                    SvgPictureCustom(
+                                      height: AppSize.s14.h,
+                                      width: AppSize.s14.w,
+                                      assetsName: IconAssets.locationIcon,
+                                      color: ColorManager.grey,
+                                    ),
+                                    SizedBox(
+                                      width: AppSize.s4.w,
+                                    ),
+                                    TextCustom(
+                                      text: state.serviceEntity.resultEntity
+                                          .response.city,
+                                      textStyle: TextStyle(
+                                        fontFamily: 'Gilroy',
+                                        fontSize: FontSize.s12,
+                                        color: ColorManager.grey,
+                                        fontWeight: FontWeightManager.regular,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           TextCustom(
                             text:

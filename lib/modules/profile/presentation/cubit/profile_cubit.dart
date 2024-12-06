@@ -40,7 +40,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     IconAssets.terms,
     IconAssets.contactUs,
     IconAssets.logout,
-    IconAssets.delete,
   ];
   final List<String> name = [
     LocaleKeys.editProfile,
@@ -51,7 +50,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     LocaleKeys.termsAndConditions,
     LocaleKeys.contactUs,
     LocaleKeys.logout,
-    LocaleKeys.delete,
   ];
   final List<String> routeName = [
     Routes.editProfileRoute,
@@ -61,7 +59,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     'null',
     'null',
     Routes.contactUsRoute,
-    'null',
     'null',
   ];
   int? userId;

@@ -161,7 +161,6 @@ class MainPageState extends State<MainPage> {
                                                     : ColorManager.white),
                                         // SizedBox(height: AppSize.s8.h,),
                                         SizedBox(
-                                          width: AppSize.s60.w,
                                           child: TextCustom(
                                             textAlign: TextAlign.center,
                                             text: dataName[i],

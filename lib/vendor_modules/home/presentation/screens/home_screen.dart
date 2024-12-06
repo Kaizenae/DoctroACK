@@ -52,7 +52,6 @@ class VendorHomeScreen extends StatelessWidget {
                 builder: (context, state) {
                   return switch (state) {
                     ClinicProfileSuccessState() => SizedBox(
-                        height: AppSize.s44,
                         child: Row(
                           children: [
                             state.clinicProfileEntity.resultEntity.response

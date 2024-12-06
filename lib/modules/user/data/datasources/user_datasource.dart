@@ -14,8 +14,6 @@ abstract class UserRemoteDataSource {
     required String body,
     required List<String> toToken,
   });
-
-  Future<GeneralModel> deleteUserAccount();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -51,12 +49,5 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           "key=AAAAeLI0T4g:APA91bG-8HbI570CfQQmMxrD4nKjawRTBRTbMUYlEyd1O2pYi_vXeUbkgQtq4qpVi6C95TkCmJowLbaNdau7xWbqpMfNVZo58Y0Wt7cQJSgzrYP0Z5ri9HOuWGBA1-iTbjbrmDDmIlNZ"
     });
     return NotificationModel.fromJson(response);
-  }
-
-  @override
-  Future<GeneralModel> deleteUserAccount() async {
-    final response = await apiConsumer.post(EndPoints.deleteUserAccountEndpoint,
-        body: {"jsonrpc": "2.0", "params": {}});
-    return GeneralModel.fromJson(response);
   }
 }

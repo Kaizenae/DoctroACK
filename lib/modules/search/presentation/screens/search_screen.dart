@@ -265,13 +265,21 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       RSizedBox.vertical(AppSize.s16.h),
+                      const Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: TextCustom(
+                          text: LocaleKeys.services,
+                        ),
+                      ),
+                      RSizedBox.vertical(AppSize.s16.h),
                       switch (state) {
                         GetSearchServicesSuccessState() => SizedBox(
                             width: context.width - 40,
                             child: ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.searchServicesEntity.resultEntity
-                                  .response.length,
+                                  .response.services.length,
                               itemBuilder: (context, index) => Container(
                                 padding: EdgeInsets.all(AppPadding.p12),
                                 margin: EdgeInsets.only(bottom: AppMargin.m8),
@@ -288,11 +296,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                     ServiceCubit.get(context).serviceID = state
                                         .searchServicesEntity
                                         .resultEntity
-                                        .response[index]
+                                        .response
+                                        .services[index]
                                         .id;
                                     ServiceCubit.get(context).serviceName =
                                         state.searchServicesEntity.resultEntity
-                                            .response[index].name;
+                                            .response.services[index].name;
                                     navigator(
                                         context, Routes.serviceClinicRoute);
                                   },
@@ -309,7 +318,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                               url: state
                                                   .searchServicesEntity
                                                   .resultEntity
-                                                  .response[index]
+                                                  .response
+                                                  .services[index]
                                                   .image,
                                               boxFit: BoxFit.fill),
                                           Row(
@@ -326,7 +336,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 text: state
                                                     .searchServicesEntity
                                                     .resultEntity
-                                                    .response[index]
+                                                    .response
+                                                    .services[index]
                                                     .city,
                                                 textStyle:
                                                     getSemiBoldGilroyStyle(
@@ -357,7 +368,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     text: state
                                                         .searchServicesEntity
                                                         .resultEntity
-                                                        .response[index]
+                                                        .response
+                                                        .services[index]
                                                         .name,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -384,7 +396,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                       text: state
                                                           .searchServicesEntity
                                                           .resultEntity
-                                                          .response[index]
+                                                          .response
+                                                          .services[index]
                                                           .rate
                                                           .toStringAsFixed(1),
                                                       textStyle:
@@ -400,12 +413,180 @@ class _SearchScreenState extends State<SearchScreen> {
                                             ),
                                           ),
                                           SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                (AppSize.s100 * 2.2).w,
                                             child: TextCustom(
                                               text: state
                                                   .searchServicesEntity
                                                   .resultEntity
-                                                  .response[index]
+                                                  .response
+                                                  .services[index]
                                                   .description,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              textStyle: getSemiBoldGilroyStyle(
+                                                fontSize: FontSize.s12,
+                                                color: ColorManager.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        GetSearchServicesErrorState() =>
+                          ErrorsWidget(text: state.message),
+                        GetSearchServicesLoadingState() => ShimmerCustom(
+                              child: Container(
+                            width: AppSize.s100.w * 3.43,
+                            height: AppSize.s100.h * 1.18,
+                            decoration: ShapeDecoration(
+                              color: ColorManager.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          )),
+                        _ => const SizedBox()
+                      },
+                      RSizedBox.vertical(AppSize.s16.h),
+                      const Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: TextCustom(
+                          text: LocaleKeys.allClinics,
+                        ),
+                      ),
+                      RSizedBox.vertical(AppSize.s16.h),
+                      switch (state) {
+                        GetSearchServicesSuccessState() => SizedBox(
+                            width: context.width - 40,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.searchServicesEntity.resultEntity
+                                  .response.clinics.length,
+                              itemBuilder: (context, index) => Container(
+                                padding: EdgeInsets.all(AppPadding.p12),
+                                margin: EdgeInsets.only(bottom: AppMargin.m8),
+                                width: AppSize.s100.w * 3.43,
+                                height: AppSize.s100.h,
+                                decoration: ShapeDecoration(
+                                  color: ColorManager.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    ClinicCubit.get(context).clinicID = state
+                                        .searchServicesEntity
+                                        .resultEntity
+                                        .response
+                                        .clinics[index]
+                                        .id;
+                                    navigator(context, Routes.clinicRoute);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CachedNetworkImageCustom(
+                                              boarder: AppSize.s30.r,
+                                              height: AppSize.s60.h,
+                                              width: AppSize.s60.h,
+                                              url: state
+                                                  .searchServicesEntity
+                                                  .resultEntity
+                                                  .response
+                                                  .clinics[index]
+                                                  .image,
+                                              boxFit: BoxFit.fill),
+                                        ],
+                                      ),
+                                      RSizedBox.horizontal(AppSize.s20.w),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          SizedBox(
+                                            width: (AppSize.s100 * 2.2).w,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: TextCustom(
+                                                    text: state
+                                                        .searchServicesEntity
+                                                        .resultEntity
+                                                        .response
+                                                        .clinics[index]
+                                                        .name,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontSize: FontSize.s16,
+                                                    color: ColorManager.white,
+                                                    fontWeight:
+                                                        FontWeightManager
+                                                            .medium,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SvgPictureCustom(
+                                                      assetsName:
+                                                          IconAssets.star2,
+                                                      height: AppSize.s18.h,
+                                                      width: AppSize.s18.h,
+                                                      color: null,
+                                                    ),
+                                                    SizedBox(
+                                                      width: AppSize.s4.w,
+                                                    ),
+                                                    TextCustom(
+                                                      text: state
+                                                          .searchServicesEntity
+                                                          .resultEntity
+                                                          .response
+                                                          .clinics[index]
+                                                          .rate
+                                                          .toStringAsFixed(1),
+                                                      textStyle:
+                                                          getSemiBoldGilroyStyle(
+                                                        fontSize: FontSize.s12,
+                                                        color:
+                                                            ColorManager.white,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                (AppSize.s100 * 2.2).w,
+                                            child: TextCustom(
+                                              text: state
+                                                  .searchServicesEntity
+                                                  .resultEntity
+                                                  .response
+                                                  .clinics[index]
+                                                  .description,
+                                              maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               textStyle: getSemiBoldGilroyStyle(
                                                 fontSize: FontSize.s12,

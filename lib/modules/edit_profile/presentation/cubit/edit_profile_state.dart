@@ -35,3 +35,24 @@ class EditProfileErrorState extends EditProfileStates {
   @override
   List<Object> get props => [];
 }
+
+class DeleteUserAccountLoading extends EditProfileStates {
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteUserAccountSuccess extends EditProfileStates {
+  final GeneralEntity createEntity;
+
+  DeleteUserAccountSuccess({required this.createEntity});
+  @override
+  List<Object> get props => [createEntity];
+}
+
+class DeleteUserAccountError extends EditProfileStates {
+  final String message;
+
+  DeleteUserAccountError({required this.message});
+  @override
+  List<Object> get props => [message];
+}

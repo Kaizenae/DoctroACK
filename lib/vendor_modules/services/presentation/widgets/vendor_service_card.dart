@@ -112,7 +112,7 @@ class VendorServiceCardWidget extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(AppPadding.p6),
                   width: (AppSize.s100 * 1.35).w,
-                  height: AppSize.s60.h * 1.5,
+                  height: AppSize.s60.h * 1.35,
                   decoration: BoxDecoration(
                     color: ColorManager.white,
                     borderRadius: BorderRadius.circular(AppSize.s10.r),
@@ -122,7 +122,7 @@ class VendorServiceCardWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: AppSize.s100.w * 1.1,
+                        // width: AppSize.s100.w * 1.1,
                         child: TextCustom(
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,

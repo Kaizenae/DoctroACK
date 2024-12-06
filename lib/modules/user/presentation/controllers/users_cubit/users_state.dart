@@ -31,27 +31,6 @@ class UpdateNoTokenError extends UsersStates {
   List<Object> get props => [message];
 }
 
-class DeleteUserAccountLoading extends UsersStates {
-  @override
-  List<Object> get props => [];
-}
-
-class DeleteUserAccountSuccess extends UsersStates {
-  final GeneralEntity createEntity;
-
-  DeleteUserAccountSuccess({required this.createEntity});
-  @override
-  List<Object> get props => [createEntity];
-}
-
-class DeleteUserAccountError extends UsersStates {
-  final String message;
-
-  DeleteUserAccountError({required this.message});
-  @override
-  List<Object> get props => [message];
-}
-
 class SendNotificationLoading extends UsersStates {
   @override
   List<Object> get props => [];

@@ -9,5 +9,4 @@ abstract class UserRepository {
   Future<Either<Failure, GeneralEntity>> updateNoToken(StringParams params);
   Future<Either<Failure, NotificationEntity>> sendNotification(
       SendNotificationParams params);
-  Future<Either<Failure, GeneralEntity>> deleteUserAccount(NoParams params);
 }

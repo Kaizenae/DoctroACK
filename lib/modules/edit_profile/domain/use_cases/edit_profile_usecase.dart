@@ -14,3 +14,13 @@ class EditProfileUsecase implements UseCase<GeneralEntity, EditProfileParams> {
   Future<Either<Failure, GeneralEntity>> call(EditProfileParams params) =>
       editProfileRepository.editProfile(params);
 }
+
+class DeleteUserAccountUsecase implements UseCase<GeneralEntity, NoParams> {
+  final EditProfileRepository userRepository;
+
+  DeleteUserAccountUsecase(this.userRepository);
+
+  @override
+  Future<Either<Failure, GeneralEntity>> call(NoParams params) =>
+      userRepository.deleteUserAccount(params);
+}

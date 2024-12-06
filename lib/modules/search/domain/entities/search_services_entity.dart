@@ -12,7 +12,7 @@ class SearchServicesEntity extends Equatable {
 class ResultEntity extends Equatable {
   final bool status;
   final String message;
-  final List<ResponseEntity> response;
+  final ResponseEntity response;
 
   const ResultEntity(
       {required this.status, required this.response, required this.message});
@@ -22,6 +22,17 @@ class ResultEntity extends Equatable {
 }
 
 class ResponseEntity extends Equatable {
+  final List services;
+  final List clinics;
+  const ResponseEntity({
+    required this.clinics,
+    required this.services,
+  });
+  @override
+  List<Object?> get props => [];
+}
+
+class ServicesEntity extends Equatable {
   final int id;
   final String name;
   final String image;
@@ -29,7 +40,7 @@ class ResponseEntity extends Equatable {
   final double rate;
   final String description;
 
-  const ResponseEntity({
+  const ServicesEntity({
     required this.id,
     required this.name,
     required this.image,

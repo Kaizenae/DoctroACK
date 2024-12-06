@@ -8,6 +8,7 @@ import 'package:doctor_ack/core/widgets/svg_pic/svg_pic.dart';
 import 'package:doctor_ack/core/widgets/text_custom/text_custom.dart';
 import 'package:doctor_ack/languages/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/widgets/component.dart';
@@ -202,34 +203,39 @@ class ClinicCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(AppPadding.p8),
-                      width: AppSize.s40.h,
-                      height: AppSize.s40.h,
-                      decoration: const ShapeDecoration(
-                        color: ColorManager.yellowL1,
-                        shape: OvalBorder(),
+                InkWell(
+                  onTap: () async {
+                    await launchInBrowser(Uri.parse("tel:$phone"));
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(AppPadding.p8),
+                        width: AppSize.s40.h,
+                        height: AppSize.s40.h,
+                        decoration: const ShapeDecoration(
+                          color: ColorManager.yellowL1,
+                          shape: OvalBorder(),
+                        ),
+                        child: const SvgPictureCustom(
+                            assetsName: IconAssets.phone),
                       ),
-                      child:
-                          const SvgPictureCustom(assetsName: IconAssets.phone),
-                    ),
-                    SizedBox(
-                      width: AppSize.s8.w,
-                    ),
-                    TextCustom(
-                      text: phone!,
-                      textStyle: TextStyle(
-                        color: ColorManager.primary,
-                        fontSize: FontSize.s14,
-                        fontFamily: 'Gilroy-Medium',
-                        fontWeight: FontWeightManager.regular,
-                        height: 0,
-                        letterSpacing: -0.28,
+                      SizedBox(
+                        width: AppSize.s8.w,
                       ),
-                    ),
-                  ],
+                      TextCustom(
+                        text: phone!,
+                        textStyle: TextStyle(
+                          color: ColorManager.primary,
+                          fontSize: FontSize.s14,
+                          fontFamily: 'Gilroy-Medium',
+                          fontWeight: FontWeightManager.regular,
+                          height: 0,
+                          letterSpacing: -0.28,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -237,5 +243,14 @@ class ClinicCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -9,6 +9,8 @@ abstract class EditProfileRemoteDataSource {
     required String phoneNumber,
     required String email,
   });
+
+  Future<GeneralModel> deleteUserAccount();
 }
 
 class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
@@ -31,6 +33,13 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
         "image": image,
       }
     });
+    return GeneralModel.fromJson(response);
+  }
+
+  @override
+  Future<GeneralModel> deleteUserAccount() async {
+    final response = await apiConsumer.post(EndPoints.deleteUserAccountEndpoint,
+        body: {"jsonrpc": "2.0", "params": {}});
     return GeneralModel.fromJson(response);
   }
 }

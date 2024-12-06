@@ -28,7 +28,6 @@ class TextFormFieldCustom extends StatelessWidget {
   final Function? onChanged;
   final TextInputAction? textInputAction;
   final Function? onTab;
-  final FocusNode? focus;
   final TextAlign align;
   final String? initial;
   final bool? enable;
@@ -62,7 +61,6 @@ class TextFormFieldCustom extends StatelessWidget {
       this.onTab,
       this.onSaved,
       this.onEditingComplete,
-      this.focus,
       this.align = TextAlign.start,
       this.initial,
       this.enable,
@@ -94,13 +92,14 @@ class TextFormFieldCustom extends StatelessWidget {
       ),
       child: TextFormField(
         maxLines: maxLines ?? 1,
-
         textAlignVertical: TextAlignVertical.center,
         textAlign: align,
-        focusNode: focus,
-        // autofocus: true,
+        autofocus: false,
         enabled: enable,
         initialValue: initial,
+        onFieldSubmitted: (value) {
+          FocusScope.of(context).unfocus();
+        },
         controller: controller,
         textInputAction: textInputAction ?? TextInputAction.done,
         onChanged: (value) {

@@ -10,8 +10,11 @@ import 'edit_profile_state.dart';
 
 class EditProfileCubit extends Cubit<EditProfileStates> {
   final EditProfileUsecase editProfileUsecase;
+  final DeleteUserAccountUsecase deleteUserAccountUsecase;
+
   EditProfileCubit({
     required this.editProfileUsecase,
+    required this.deleteUserAccountUsecase,
   }) : super(InitEditProfileState());
 
   static EditProfileCubit get(context) => BlocProvider.of(context);
@@ -59,5 +62,14 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
     } else {
       return true;
     }
+  }
+
+  Future<void> deleteUserAccountFun() async {
+    Either<Failure, GeneralEntity> response =
+        await deleteUserAccountUsecase(NoParams());
+    emit(response.fold(
+        (failure) => DeleteUserAccountError(message: failure.message),
+        (createNoIdEntity) =>
+            DeleteUserAccountSuccess(createEntity: createNoIdEntity)));
   }
 }

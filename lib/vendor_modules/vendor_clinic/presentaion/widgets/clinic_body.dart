@@ -23,7 +23,6 @@ import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/styles_manager.dart';
 import '../../../../modules/language/presentation/pages/lang_view.dart';
 import '../../../../modules/profile/presentation/screens/profile_component.dart';
-import '../../../../modules/user/presentation/controllers/users_cubit/users_cubit.dart';
 import '../../../../modules/webViews/controllers/web_view_cubit.dart';
 import '../controllers/clinic_profile_cubit/clinic_profile_cubit.dart';
 
@@ -294,40 +293,6 @@ class ClinicProfileWidget extends StatelessWidget {
                         .toStringAsFixed(1);
 
                     navigator(context, Routes.clinicReviewsRoute);
-                  } else if (index == 11) {
-                    dialogCustom(
-                        pressEventOk: () async {
-                          await UsersCubit.get(context).deleteUserAccountFun();
-                          AppConstants.token = '';
-                          AppConstants.expireToken = '';
-                          AppConstants.type = '';
-                          await CacheHelper.clearData().then((value) =>
-                              navigatorAndRemove(context, Routes.loginRoute));
-                          // navigatorAndRemove(context, Routes.loginRoute);
-                        },
-                        context: context,
-                        okButtonName: LocaleKeys.delete.tr(),
-                        cancelButtonName: LocaleKeys.cancel.tr(),
-                        body: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextCustom(
-                              text: LocaleKeys.deleteAccount,
-                              fontWeight: FontWeightManager.semiBold,
-                              fontSize: FontSize.s18,
-                            ),
-                            const RSizedBox.vertical(AppSize.s16),
-                            TextCustom(
-                              text: LocaleKeys.deleteAccountWarning,
-                              textAlign: TextAlign.center,
-                              textStyle: getMediumGilroyStyle(
-                                color: ColorManager.grey,
-                                fontSize: FontSize.s14,
-                              ),
-                            ),
-                            const RSizedBox.vertical(AppSize.s16),
-                          ],
-                        ));
                   } else {
                     navigator(context, clinicCubit.routeName[index]);
                   }

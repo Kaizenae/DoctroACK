@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_ack/core/general_entities/notification_entity.dart';
-import 'package:doctor_ack/modules/forget_password/domain/entities/general_entity.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../../../../../core/utils/packages_imprts.dart';
 
@@ -12,12 +11,10 @@ import 'users_state.dart';
 class UsersCubit extends Cubit<UsersStates> {
   final UpdateNoTokenUsecase updateNoTokenUsecase;
   final SendNotificationUsecase sendNotificationUsecase;
-  final DeleteUserAccountUsecase deleteUserAccountUsecase;
 
   UsersCubit({
     required this.updateNoTokenUsecase,
     required this.sendNotificationUsecase,
-    required this.deleteUserAccountUsecase,
   }) : super(InitialUsersState());
 
   static UsersCubit get(context) => BlocProvider.of(context);
@@ -47,13 +44,4 @@ class UsersCubit extends Cubit<UsersStates> {
   //   response.fold(
   //       (failure) => failure.message, (createNoIdEntity) => createNoIdEntity);
   // }
-
-  Future<void> deleteUserAccountFun() async {
-    Either<Failure, GeneralEntity> response =
-        await deleteUserAccountUsecase(NoParams());
-    emit(response.fold(
-        (failure) => DeleteUserAccountError(message: failure.message),
-        (createNoIdEntity) =>
-            DeleteUserAccountSuccess(createEntity: createNoIdEntity)));
-  }
 }

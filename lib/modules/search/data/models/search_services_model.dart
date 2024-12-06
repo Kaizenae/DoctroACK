@@ -17,23 +17,41 @@ class ResultModel extends ResultEntity {
   ResultModel({
     bool? status,
     String? message,
-    List<ResponseEntity>? responseEntity,
+    ResponseEntity? responseEntity,
   }) : super(
           status: status ?? false,
           message: message ?? '',
-          response: responseEntity ?? [],
+          response: responseEntity!,
         );
 
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
         status: json['status'] == 'success' ? true : false,
         message: json['massage'],
-        responseEntity: List<ResponseEntity>.from(
-            json['result'].map((e) => ResponseModel.fromJson(e))),
+        responseEntity: ResponseModel.fromJson(
+          json["result"],
+        ),
       );
 }
 
 class ResponseModel extends ResponseEntity {
-  const ResponseModel({
+  ResponseModel({List? services, List? clinics})
+      : super(clinics: clinics ?? [], services: services ?? []);
+  factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
+        services: List<ServicesEntity>.from(
+          json["services"].map(
+            (e) => ServicesModel.fromJson(e),
+          ),
+        ),
+        clinics: List<ServicesEntity>.from(
+          json["clinics"].map(
+            (e) => ServicesModel.fromJson(e),
+          ),
+        ),
+      );
+}
+
+class ServicesModel extends ServicesEntity {
+  const ServicesModel({
     int? id,
     String? name,
     String? city,
@@ -49,7 +67,7 @@ class ResponseModel extends ResponseEntity {
           rate: rate ?? 0.0,
         );
 
-  factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
+  factory ServicesModel.fromJson(Map<String, dynamic> json) => ServicesModel(
         name: json['name'],
         city: json['city'],
         id: json['id'],

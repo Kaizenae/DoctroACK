@@ -6,7 +6,6 @@ import 'package:doctor_ack/core/utils/media_query_values.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
 import '../../../../core/widgets/cached_image/cached_network_image.dart';
 import 'package:doctor_ack/modules/edit_profile/presentation/cubit/edit_profile_cubit.dart';
-import 'package:doctor_ack/modules/user/presentation/controllers/users_cubit/users_cubit.dart';
 import 'package:doctor_ack/modules/webViews/controllers/web_view_cubit.dart';
 import '../../../../../core/utils/packages_imprts.dart';
 import '../../../../core/utils/assets_manager.dart';
@@ -328,40 +327,6 @@ class ProfileWidget extends StatelessWidget {
                             const RSizedBox.vertical(AppSize.s16),
                             TextCustom(
                               text: LocaleKeys.logoutWarning,
-                              textStyle: getMediumGilroyStyle(
-                                color: ColorManager.grey,
-                                fontSize: FontSize.s14,
-                              ),
-                            ),
-                            const RSizedBox.vertical(AppSize.s16),
-                          ],
-                        ));
-                  } else if (index == 8) {
-                    dialogCustom(
-                        pressEventOk: () async {
-                          await UsersCubit.get(context).deleteUserAccountFun();
-                          AppConstants.token = '';
-                          AppConstants.expireToken = '';
-                          AppConstants.type = '';
-                          await CacheHelper.clearData().then((value) =>
-                              navigatorAndRemove(context, Routes.loginRoute));
-                          // navigatorAndRemove(context, Routes.loginRoute);
-                        },
-                        context: context,
-                        okButtonName: LocaleKeys.delete.tr(),
-                        cancelButtonName: LocaleKeys.cancel.tr(),
-                        body: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextCustom(
-                              text: LocaleKeys.deleteAccount,
-                              fontWeight: FontWeightManager.semiBold,
-                              fontSize: FontSize.s18,
-                            ),
-                            const RSizedBox.vertical(AppSize.s16),
-                            TextCustom(
-                              text: LocaleKeys.deleteAccountWarning,
-                              textAlign: TextAlign.center,
                               textStyle: getMediumGilroyStyle(
                                 color: ColorManager.grey,
                                 fontSize: FontSize.s14,
