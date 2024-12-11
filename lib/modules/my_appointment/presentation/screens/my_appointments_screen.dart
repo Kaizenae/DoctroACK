@@ -36,7 +36,6 @@ class MyAppointmentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusScope.of(context).unfocus();
     return ScaffoldCustom(
         appBarCustom: const AppBarCustom(
           text: LocaleKeys.myAppointments,
