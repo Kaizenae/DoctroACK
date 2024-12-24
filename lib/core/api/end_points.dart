@@ -1,6 +1,6 @@
 class EndPoints {
   static const String baseUrl = 'https://';
-  static const String odooBaseUrl = 'doctorack.odoo.com/api';
+  static const String odooBaseUrl = 'doctorack.odoo.com/api/';
   static const String database = 'doctorack-doctorack-main-10272173';
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------\\
