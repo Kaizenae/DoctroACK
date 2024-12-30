@@ -1,8 +1,14 @@
 class EndPoints {
   static const String baseUrl = 'https://';
-  static const String odooBaseUrl = 'doctorack.odoo.com/api/';
-  static const String database = 'doctorack-doctorack-main-10272173';
-
+  // LIVE URL
+//   static const String odooBaseUrl = 'doctorack.odoo.com/api/';
+  //   LIVE DATABASE
+//   static const String database = 'doctorack-doctorack-main-10272173';
+// TEST URL
+  static const String odooBaseUrl =
+      'doctorack-staging-11094079.dev.odoo.com/api/';
+  //   TEST DATABASE
+  static const String database = 'doctorack-staging-11094079';
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
   static const String sendNotificationEndpoint = 'fcm.googleapis.com/fcm/send';
