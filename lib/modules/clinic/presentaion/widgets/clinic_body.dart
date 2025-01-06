@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:doctor_ack/core/utils/assets_manager.dart';
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/font_manager.dart';
@@ -20,6 +22,7 @@ import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/constants_manager.dart';
 // import '../../../../core/utils/dynamic_link.dart';
 import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/share/share.dart';
 import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
 import '../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import '../../../favourite/presentation/controllers/add_remove_favourite_cubit/add_remove_favourite_state.dart';
@@ -866,23 +869,23 @@ class ClinicBody extends StatelessWidget {
                       SizedBox(
                         width: AppSize.s10.w,
                       ),
-                      // InkWell(
-                      //   // onTap: state is GetClinicSuccessState
-                      //   // ? () {
-                      //   //     DynamicLinksHelper.createLink(
-                      //   //         '${Routes.clinicRoute}/${state.clinicEntity.resultEntity.response.id.toString()}',
-                      //   //         state.clinicEntity.resultEntity.response
-                      //   //             .name,
-                      //   //         'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
-                      //   //   }
-                      //   // : null,
-                      //   child: SvgPictureCustom(
-                      //     assetsName: IconAssets.share,
-                      //     color: null,
-                      //     height: AppSize.s34.h,
-                      //     width: AppSize.s34.h,
-                      //   ),
-                      // ),
+                      InkWell(
+                        onTap: state is GetClinicSuccessState
+                            ? () {
+                                shareFun(
+                                  name: state.clinicEntity.resultEntity.response
+                                      //             .name
+                                      .toString(),
+                                );
+                              }
+                            : null,
+                        child: SvgPictureCustom(
+                          assetsName: IconAssets.share,
+                          color: null,
+                          height: AppSize.s34.h,
+                          width: AppSize.s34.h,
+                        ),
+                      ),
                     ],
                   ),
                 )

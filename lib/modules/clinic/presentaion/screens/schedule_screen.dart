@@ -7,13 +7,18 @@ import 'package:doctor_ack/languages/locale_keys.g.dart';
 import 'package:doctor_ack/modules/clinic/presentaion/widgets/schedule_widgets/schedule_button_Widget.dart';
 import 'package:doctor_ack/modules/clinic/presentaion/widgets/schedule_widgets/schedule_date_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 // import '../../../../core/utils/dynamic_link.dart';
 // import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/styles_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/refund_widget.dart';
+import '../../../../core/widgets/share/share.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../service/presentation/controller/service_cubit.dart';
+import '../../../service/presentation/controller/service_state.dart';
 import '../widgets/schedule_widgets/schedule_time_widget.dart';
 import '../widgets/service_data_widget.dart';
 import '../../../../core/utils/packages_imprts.dart';
@@ -27,30 +32,30 @@ class ScheduleScreen extends StatelessWidget {
       appBarCustom: AppBarCustom(
         centerTitle: false,
         text: ServiceCubit.get(context).serviceName,
-        actions: const [
-          // BlocBuilder<ServiceCubit, ServiceState>(
-          //   builder: (context, state) {
-          //     return InkWell(
-          //       // onTap: state is GetServiceSuccessState
-          //       //     ? () {
-          //       //         DynamicLinksHelper.createLink(
-          //       //             '${Routes.serviceClinicRoute}/${state.serviceEntity.resultEntity.response.id.toString()}',
-          //       //             state.serviceEntity.resultEntity.response.name,
-          //       //             'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
-          //       //       }
-          //       //     : null,
-          //       child: Padding(
-          //         padding: EdgeInsets.only(right: AppPadding.p16),
-          //         child: SvgPictureCustom(
-          //           assetsName: IconAssets.share,
-          //           color: null,
-          //           height: AppSize.s34.h,
-          //           width: AppSize.s34.h,
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // )
+        actions: [
+          BlocBuilder<ServiceCubit, ServiceState>(
+            builder: (context, state) {
+              return InkWell(
+                onTap: state is GetServiceSuccessState
+                    ? () async {
+                        shareFun(
+                          name: state.serviceEntity.resultEntity.response.name
+                              .toString(),
+                        );
+                      }
+                    : null,
+                child: Padding(
+                  padding: EdgeInsets.only(right: AppPadding.p16),
+                  child: SvgPictureCustom(
+                    assetsName: IconAssets.share,
+                    color: null,
+                    height: AppSize.s34.h,
+                    width: AppSize.s34.h,
+                  ),
+                ),
+              );
+            },
+          )
         ],
       ),
       body: SingleChildScrollView(

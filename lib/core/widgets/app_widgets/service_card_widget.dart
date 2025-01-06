@@ -187,48 +187,52 @@ class ServiceCardWidget extends StatelessWidget {
                     SizedBox(
                       width: AppSize.s4.w,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: AppSize.s80.w,
-                          child: TextCustom(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            textStyle: TextStyle(
-                              fontFamily: 'Gilroy',
-                              fontSize: FontSize.s12,
-                              fontWeight: FontWeightManager.medium,
-                            ),
-                            text: clinicName!,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            SvgPictureCustom(
-                              height: AppSize.s14.h,
-                              width: AppSize.s14.w,
-                              assetsName: IconAssets.locationIcon,
-                              color: ColorManager.grey,
-                            ),
-                            SizedBox(
-                              width: AppSize.s8.w,
-                            ),
-                            TextCustom(
-                              text: city!,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: AppSize.s80.w,
+                            child: TextCustom(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               textStyle: TextStyle(
                                 fontFamily: 'Gilroy',
                                 fontSize: FontSize.s12,
-                                color: ColorManager.grey,
-                                fontWeight: FontWeightManager.regular,
+                                fontWeight: FontWeightManager.medium,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              text: clinicName!,
                             ),
-                          ],
-                        )
-                      ],
+                          ),
+                          Row(
+                            children: [
+                              SvgPictureCustom(
+                                height: AppSize.s14.h,
+                                width: AppSize.s14.w,
+                                assetsName: IconAssets.locationIcon,
+                                color: ColorManager.grey,
+                              ),
+                              SizedBox(
+                                width: AppSize.s8.w,
+                              ),
+                              Expanded(
+                                child: TextCustom(
+                                  text: city!,
+                                  textStyle: TextStyle(
+                                    fontFamily: 'Gilroy',
+                                    fontSize: FontSize.s12,
+                                    color: ColorManager.grey,
+                                    fontWeight: FontWeightManager.regular,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),

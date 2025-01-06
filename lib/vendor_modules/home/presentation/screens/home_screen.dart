@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_ack/core/utils/assets_manager.dart';

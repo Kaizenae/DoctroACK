@@ -13,9 +13,12 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/packages_imprts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
+import '../../../../core/widgets/share/share.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../modules/clinic/presentaion/controllers/available_times_cubit/available_times_cubit.dart';
 import '../../../../modules/clinic/presentaion/controllers/available_times_cubit/available_times_state.dart';
 import '../../../../modules/clinic/presentaion/widgets/service_data_widget.dart';
@@ -34,19 +37,26 @@ class ServiceScreen extends StatelessWidget {
             text: state is GetServiceSuccessState
                 ? state.serviceEntity.resultEntity.response.name
                 : 'Hydra Facial',
-            actions: const [
-              // InkWell(
-              //   onTap: () {},
-              //   child: Padding(
-              //     padding: EdgeInsets.only(right: AppPadding.p16),
-              //     child: SvgPictureCustom(
-              //       assetsName: IconAssets.share,
-              //       color: null,
-              //       height: AppSize.s34.h,
-              //       width: AppSize.s34.h,
-              //     ),
-              //   ),
-              // )
+            actions: [
+              InkWell(
+                onTap: state is GetServiceSuccessState
+                    ? () async {
+                        shareFun(
+                          name: state.serviceEntity.resultEntity.response.name
+                              .toString(),
+                        );
+                      }
+                    : null,
+                child: Padding(
+                  padding: EdgeInsets.only(right: AppPadding.p16),
+                  child: SvgPictureCustom(
+                    assetsName: IconAssets.share,
+                    color: null,
+                    height: AppSize.s34.h,
+                    width: AppSize.s34.h,
+                  ),
+                ),
+              )
             ],
           ),
           body: SmartRefresher(

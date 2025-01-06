@@ -108,16 +108,6 @@ class _AppointmentServiceScreenState extends State<AppointmentServiceScreen> {
                                               color: ColorManager.black,
                                             )),
                                         // const Spacer(),
-                                        // InkWell(
-                                        //     onTap: () {
-                                        //       Navigator.pop(context);
-                                        //     },
-                                        //     child: SvgPictureCustom(
-                                        //       assetsName: IconAssets.share,
-                                        //       color: null,
-                                        //       height: AppSize.s34.h,
-                                        //       width: AppSize.s34.h,
-                                        //     )),
                                       ],
                                     ),
                                   ),

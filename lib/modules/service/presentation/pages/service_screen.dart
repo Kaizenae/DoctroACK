@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 // import 'package:doctor_ack/core/utils/dynamic_link.dart';
@@ -21,6 +23,7 @@ import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/drop_down/drop_dwon_button.dart';
 import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/share/share.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../favourite/presentation/controllers/add_remove_favourite_cubit/add_remove_favourite_state.dart';
@@ -197,25 +200,21 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                     const SizedBox(
                                       width: AppSize.s10,
                                     ),
-                                    // InkWell(
-                                    //   // onTap: () async {
-                                    //   //   // _onShare(context);
-                                    //   //   // print(await File(desiredDestinationPath).writeAsBytes( HelperFunctions.imageConverter(state.serviceEntity.resultEntity
-                                    //   //   //     .response.icon)))  ;
-
-                                    //   //   DynamicLinksHelper.createLink(
-                                    //   //       '${Routes.serviceClinicRoute}/${state.serviceEntity.resultEntity.response.id.toString()}',
-                                    //   //       state.serviceEntity.resultEntity
-                                    //   //           .response.name,
-                                    //   //       'https://i.ibb.co/JQ8Gp9X/logo-icon.png');
-                                    //   // },
-                                    //   child: SvgPictureCustom(
-                                    //     assetsName: IconAssets.share,
-                                    //     color: null,
-                                    //     height: AppSize.s34.h,
-                                    //     width: AppSize.s34.h,
-                                    //   ),
-                                    // ),
+                                    InkWell(
+                                      onTap: () async {
+                                        shareFun(
+                                          name: state.serviceEntity.resultEntity
+                                              .response.name
+                                              .toString(),
+                                        );
+                                      },
+                                      child: SvgPictureCustom(
+                                        assetsName: IconAssets.share,
+                                        color: null,
+                                        height: AppSize.s34.h,
+                                        width: AppSize.s34.h,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

@@ -96,25 +96,6 @@ class ClinicCard extends StatelessWidget {
                     SizedBox(
                       height: AppSize.s4.h,
                     ),
-                    Row(
-                      children: [
-                        TextCustom(
-                          text: '$expertise | ',
-                          textStyle: getMediumGilroyStyle(
-                            color: ColorManager.grey,
-                            fontSize: FontSize.s14,
-                          ),
-                        ),
-                        TextCustom(
-                          text:
-                              '$experience ${LocaleKeys.year.tr()} ${LocaleKeys.exp.tr()}',
-                          textStyle: getMediumGilroyStyle(
-                            color: ColorManager.grey,
-                            fontSize: FontSize.s14,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
                 const Spacer(),
@@ -171,73 +152,38 @@ class ClinicCard extends StatelessWidget {
             SizedBox(
               height: AppSize.s10.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(AppPadding.p8),
-                      width: AppSize.s40.h,
-                      height: AppSize.s40.h,
-                      decoration: const ShapeDecoration(
-                        color: Color(0xFFE9F6F6),
-                        shape: OvalBorder(),
-                      ),
-                      child: const SvgPictureCustom(
-                          assetsName: IconAssets.profileUser2),
+            InkWell(
+              onTap: () async {
+                await launchInBrowser(Uri.parse("tel:$phone"));
+              },
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(AppPadding.p8),
+                    width: AppSize.s40.h,
+                    height: AppSize.s40.h,
+                    decoration: const ShapeDecoration(
+                      color: ColorManager.yellowL1,
+                      shape: OvalBorder(),
                     ),
-                    SizedBox(
-                      width: AppSize.s8.w,
-                    ),
-                    TextCustom(
-                      text: '$patient ${LocaleKeys.patients.tr()}',
-                      textStyle: TextStyle(
-                        color: ColorManager.primary,
-                        fontSize: FontSize.s14,
-                        fontFamily: 'Gilroy-Medium',
-                        fontWeight: FontWeightManager.regular,
-                        height: 0,
-                        letterSpacing: -0.28,
-                      ),
-                    ),
-                  ],
-                ),
-                InkWell(
-                  onTap: () async {
-                    await launchInBrowser(Uri.parse("tel:$phone"));
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(AppPadding.p8),
-                        width: AppSize.s40.h,
-                        height: AppSize.s40.h,
-                        decoration: const ShapeDecoration(
-                          color: ColorManager.yellowL1,
-                          shape: OvalBorder(),
-                        ),
-                        child: const SvgPictureCustom(
-                            assetsName: IconAssets.phone),
-                      ),
-                      SizedBox(
-                        width: AppSize.s8.w,
-                      ),
-                      TextCustom(
-                        text: phone!,
-                        textStyle: TextStyle(
-                          color: ColorManager.primary,
-                          fontSize: FontSize.s14,
-                          fontFamily: 'Gilroy-Medium',
-                          fontWeight: FontWeightManager.regular,
-                          height: 0,
-                          letterSpacing: -0.28,
-                        ),
-                      ),
-                    ],
+                    child: const SvgPictureCustom(assetsName: IconAssets.phone),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: AppSize.s8.w,
+                  ),
+                  TextCustom(
+                    text: phone!,
+                    textStyle: TextStyle(
+                      color: ColorManager.primary,
+                      fontSize: FontSize.s14,
+                      fontFamily: 'Gilroy-Medium',
+                      fontWeight: FontWeightManager.regular,
+                      height: 0,
+                      letterSpacing: -0.28,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

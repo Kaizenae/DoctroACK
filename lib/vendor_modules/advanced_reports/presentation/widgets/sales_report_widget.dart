@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
 import 'package:doctor_ack/core/utils/values_manager.dart';
