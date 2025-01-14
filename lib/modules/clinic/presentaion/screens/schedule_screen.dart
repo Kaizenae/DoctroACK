@@ -7,7 +7,6 @@ import 'package:doctor_ack/languages/locale_keys.g.dart';
 import 'package:doctor_ack/modules/clinic/presentaion/widgets/schedule_widgets/schedule_button_Widget.dart';
 import 'package:doctor_ack/modules/clinic/presentaion/widgets/schedule_widgets/schedule_date_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 // import '../../../../core/utils/dynamic_link.dart';

@@ -2,11 +2,9 @@ import 'package:doctor_ack/core/utils/assets_manager.dart';
 import 'package:doctor_ack/core/utils/color_manager.dart';
 import 'package:doctor_ack/core/utils/font_manager.dart';
 import 'package:doctor_ack/core/utils/media_query_values.dart';
-import 'package:doctor_ack/core/utils/styles_manager.dart';
 import 'package:doctor_ack/core/utils/values_manager.dart';
 import 'package:doctor_ack/core/widgets/svg_pic/svg_pic.dart';
 import 'package:doctor_ack/core/widgets/text_custom/text_custom.dart';
-import 'package:doctor_ack/languages/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

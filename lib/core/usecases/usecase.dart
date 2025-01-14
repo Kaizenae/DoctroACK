@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import '../error/failure.dart';
@@ -393,6 +395,7 @@ class CreateReservationOrderParams extends Equatable {
   final String start;
   final String state;
   final String transId;
+  final bool from_app;
   final bool wallet;
 
   const CreateReservationOrderParams({
@@ -401,6 +404,7 @@ class CreateReservationOrderParams extends Equatable {
     required this.date,
     required this.start,
     required this.state,
+    required this.from_app,
     required this.wallet,
     required this.transId,
   });
@@ -410,10 +414,11 @@ class CreateReservationOrderParams extends Equatable {
         serviceID,
         userID,
         date,
+        from_app,
         start,
         state,
         wallet,
-    transId,
+        transId,
       ];
 }
 
