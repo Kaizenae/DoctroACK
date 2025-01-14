@@ -33,7 +33,6 @@ class CreateReservationOrderCubit extends Cubit<CreateReservationOrderState> {
             start: start,
             transId: transID,
             state: 'confirm'));
-
     emit(response.fold((failure) {
       return CreateReservationOrderErrorState(message: failure.message);
     }, (createEntity) {

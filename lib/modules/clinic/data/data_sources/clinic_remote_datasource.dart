@@ -90,6 +90,7 @@ class ClinicRemoteDataSourceImpl implements ClinicRemoteDataSource {
         "start": start,
         "state": state,
         "wallet": wallet,
+        "from_app": true,
         "trans_id": transId
       }
     });
