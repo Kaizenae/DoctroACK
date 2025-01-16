@@ -325,7 +325,7 @@ class AllClinicsScreen extends StatelessWidget {
                                   horizontal: AppPadding.p16,
                                   vertical: AppPadding.p4),
                               child: Container(
-                                width: (AppSize.s100 * 3.4).w,
+                                // width: (AppSize.s100 * 3.4).w,
                                 decoration: BoxDecoration(
                                     color: ColorManager.caffe,
                                     borderRadius:
@@ -335,7 +335,7 @@ class AllClinicsScreen extends StatelessWidget {
                                     CachedNetworkImageCustom(
                                         boarder: AppSize.s10.r,
                                         // color: ColorManager.caffe,
-                                        width: (AppSize.s100 * 3.4).w,
+                                        // width: (AppSize.s100 * 3.4).w,
                                         height: (AppSize.s100 * 1.6).h,
                                         boxFit: BoxFit.cover,
                                         url: state.offerEntity.resultEntity
