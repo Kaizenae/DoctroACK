@@ -145,7 +145,7 @@ class RegisterScreen extends StatelessWidget {
                         TextFormFieldCustom(
                           radius: AppSize.s24.r,
                           fillColor: ColorManager.white,
-                          hint: LocaleKeys.enterPhoneNumber.tr(),
+                          hint: "05 xxx xxx xx",
                           controller: registerCubit.phoneController,
                           validate: (value) {
                             if (value!.trim().isEmpty || value == ' ') {
@@ -153,6 +153,12 @@ class RegisterScreen extends StatelessWidget {
                             }
                             if (!RegExp(r"[a-z0-9]").hasMatch(value)) {
                               return LocaleKeys.phoneTextField.tr();
+                            }
+                            if (value.toString().length >= 11) {
+                              return LocaleKeys.phoneNumberDoesntCorrect.tr();
+                            }
+                            if (value.toString().length <= 9) {
+                              return LocaleKeys.phoneNumberDoesntCorrect.tr();
                             }
                             return null;
                           },

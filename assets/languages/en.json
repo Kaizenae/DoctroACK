@@ -33,6 +33,7 @@
   "currencyTextField": "Currency cannot be empty.",
   "passwordTextField": "Password cannot be empty.",
   "phoneTextField": "The phone number does not have to be empty",
+  "phoneNumberDoesntCorrect":"The Phone Number Doesn't Correct",
   "emailValidTextField": "Invalid email format. Please try again.",
   "viewAll": "View All",
   "more": "More",

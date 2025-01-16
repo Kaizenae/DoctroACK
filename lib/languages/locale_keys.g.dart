@@ -35,6 +35,7 @@ abstract class LocaleKeys {
   static const currencyTextField = 'currencyTextField';
   static const passwordTextField = 'passwordTextField';
   static const phoneTextField = 'phoneTextField';
+  static const phoneNumberDoesntCorrect = "phoneNumberDoesntCorrect";
   static const emailValidTextField = 'emailValidTextField';
   static const viewAll = 'viewAll';
   static const more = 'more';

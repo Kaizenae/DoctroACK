@@ -33,6 +33,7 @@
   "currencyTextField": "العملة لا يجب ان يكون فارغ",
   "passwordTextField" : "لا يمكن أن تكون كلمة المرور فارغة.",
   "phoneTextField" : "رقم الهاتف لا يجب ان يكون فارغ",
+  "phoneNumberDoesntCorrect":"رقم الهاتف غير صحيح",
   "emailValidTextField" : "البريد الإلكتروني غير صالح. الرجاء المحاولة مرة أخرى",
   "viewAll" : "الكل",
   "more" : "المزيد",

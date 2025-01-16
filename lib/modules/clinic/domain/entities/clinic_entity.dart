@@ -32,8 +32,7 @@ class ResponseEntity extends Equatable {
   final String image;
   final String icon;
   final double rate;
-  final double lat;
-  final double long;
+  final String locationLink;
   final String description;
   final bool favourite;
 
@@ -47,14 +46,13 @@ class ResponseEntity extends Equatable {
     required this.expertise,
     required this.numExperience,
     required this.address,
+    required this.locationLink,
     required this.phone,
     required this.icon,
     required this.name,
     required this.favourite,
     required this.image,
     required this.rate,
-    required this.lat,
-    required this.long,
     required this.description,
     required this.createdAt,
     required this.updatedAt,
@@ -71,8 +69,6 @@ class ResponseEntity extends Equatable {
         image,
         icon,
         rate,
-        lat,
-        long,
         description,
         createdAt,
         updatedAt,

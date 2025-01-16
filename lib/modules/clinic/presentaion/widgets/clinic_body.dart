@@ -8,6 +8,7 @@ import 'package:doctor_ack/core/utils/routes_manager.dart';
 import 'package:doctor_ack/core/utils/values_manager.dart';
 import 'package:doctor_ack/core/widgets/component.dart';
 import 'package:doctor_ack/core/widgets/elevated_button/elevated_button_custom.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/cached_image/cached_network_image.dart';
 import 'package:doctor_ack/core/widgets/svg_pic/svg_pic.dart';
 import 'package:doctor_ack/core/widgets/text_custom/text_custom.dart';
@@ -665,38 +666,15 @@ class ClinicBody extends StatelessWidget {
                                                 ),
                                                 InkWell(
                                                   onTap: () async {
-                                                    bool check = await MapLauncher
-                                                            .isMapAvailable(
-                                                                MapType
-                                                                    .google) ??
-                                                        false;
-                                                    if (check) {
-                                                      await MapLauncher
-                                                          .showMarker(
-                                                        mapType: MapType.google,
-                                                        coords: Coords(
-                                                            state
-                                                                .clinicEntity
-                                                                .resultEntity
-                                                                .response
-                                                                .lat,
-                                                            state
-                                                                .clinicEntity
-                                                                .resultEntity
-                                                                .response
-                                                                .long),
-                                                        title: state
+                                                    await launchInBrowser(
+                                                      Uri.parse(
+                                                        state
                                                             .clinicEntity
                                                             .resultEntity
                                                             .response
-                                                            .name,
-                                                        description: state
-                                                            .clinicEntity
-                                                            .resultEntity
-                                                            .response
-                                                            .description,
-                                                      );
-                                                    }
+                                                            .locationLink,
+                                                      ),
+                                                    );
                                                   },
                                                   child: Container(
                                                     width: AppSize.s70.w,
@@ -895,5 +873,14 @@ class ClinicBody extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
   }
 }

@@ -300,6 +300,14 @@ class EditProfileScreen extends StatelessWidget {
                                 if (!RegExp(r"[a-z0-9]").hasMatch(value)) {
                                   return LocaleKeys.phoneTextField.tr();
                                 }
+                                if (value.toString().length >= 11) {
+                                  return LocaleKeys.phoneNumberDoesntCorrect
+                                      .tr();
+                                }
+                                if (value.toString().length <= 9) {
+                                  return LocaleKeys.phoneNumberDoesntCorrect
+                                      .tr();
+                                }
                                 return null;
                               },
                             ),

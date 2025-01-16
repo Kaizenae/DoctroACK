@@ -552,7 +552,7 @@ class AboutServiceWidget extends StatelessWidget {
                 const RSizedBox.vertical(AppSize.s10),
                 ReadMoreText(
                   description,
-                  trimLines: 2,
+                  trimLines: 4,
                   style: getMediumGilroyStyle(
                     color: ColorManager.grey,
                     fontSize: FontSize.s12,

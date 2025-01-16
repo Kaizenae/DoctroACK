@@ -28,28 +28,29 @@ class SpecialOffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-        appBarCustom: AppBarCustom(
-          text: LocaleKeys.featuredOffers,
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const SvgPictureCustom(
-                  assetsName: IconAssets.search,
-                  color: ColorManager.caffe,
-                ))
-          ],
-        ),
-        body: BlocProvider.value(
-          value: BlocProvider.of<OfferCubit>(context),
-          child: BlocBuilder<OfferCubit, OfferState>(
-            builder: (context, state) {
-              var offerCubit = OfferCubit.get(context);
-              return switch (state) {
-                GetOfferSuccessState() => ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.offerEntity.resultEntity.response.length,
-                    itemBuilder: (context, index) => Padding(
+      appBarCustom: AppBarCustom(
+        text: LocaleKeys.featuredOffers,
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const SvgPictureCustom(
+                assetsName: IconAssets.search,
+                color: ColorManager.caffe,
+              ))
+        ],
+      ),
+      body: BlocProvider.value(
+        value: BlocProvider.of<OfferCubit>(context),
+        child: BlocBuilder<OfferCubit, OfferState>(
+          builder: (context, state) {
+            var offerCubit = OfferCubit.get(context);
+            return switch (state) {
+              GetOfferSuccessState() => ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.offerEntity.resultEntity.response.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: AppPadding.p16, vertical: AppPadding.p4),
                       child: Container(
@@ -126,47 +127,49 @@ class SpecialOffersScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                    );
+                  },
+                ),
+              GetOfferErrorState() => ErrorsWidget(
+                  onPress: () => offerCubit.getOffer(),
+                  text: state.message,
+                ),
+              GetOfferLoadingState() => ShimmerCustom(
+                    child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppPadding.p16, vertical: AppPadding.p4),
+                    child: Container(
+                      width: (AppSize.s100 * 3.4).w,
+                      decoration: BoxDecoration(
+                          color: ColorManager.lightGrey,
+                          borderRadius: BorderRadius.circular(AppSize.s10.r)),
                     ),
                   ),
-                GetOfferErrorState() => ErrorsWidget(
-                    onPress: () => offerCubit.getOffer(),
-                    text: state.message,
+                )),
+              _ => ShimmerCustom(
+                    child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppPadding.p16, vertical: AppPadding.p4),
+                    child: Container(
+                      width: (AppSize.s100 * 3.4).w,
+                      decoration: BoxDecoration(
+                          color: ColorManager.lightGrey,
+                          borderRadius: BorderRadius.circular(AppSize.s10.r)),
+                    ),
                   ),
-                GetOfferLoadingState() => ShimmerCustom(
-                      child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 4,
-                    itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppPadding.p16, vertical: AppPadding.p4),
-                      child: Container(
-                        width: (AppSize.s100 * 3.4).w,
-                        decoration: BoxDecoration(
-                            color: ColorManager.lightGrey,
-                            borderRadius: BorderRadius.circular(AppSize.s10.r)),
-                      ),
-                    ),
-                  )),
-                _ => ShimmerCustom(
-                      child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 4,
-                    itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppPadding.p16, vertical: AppPadding.p4),
-                      child: Container(
-                        width: (AppSize.s100 * 3.4).w,
-                        decoration: BoxDecoration(
-                            color: ColorManager.lightGrey,
-                            borderRadius: BorderRadius.circular(AppSize.s10.r)),
-                      ),
-                    ),
-                  )),
-              };
-            },
-          ),
-        ));
+                )),
+            };
+          },
+        ),
+      ),
+    );
   }
 }
