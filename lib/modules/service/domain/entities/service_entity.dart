@@ -26,7 +26,8 @@ class ResponseEntity extends Equatable {
   final int reviews;
   final double discount;
   final int clinicID;
-  final double price;
+  final double priceWithDiscount;
+  final double priceWithoutDiscount;
   final String name;
   final String icon;
   final String city;
@@ -46,7 +47,8 @@ class ResponseEntity extends Equatable {
     required this.id,
     required this.reviews,
     required this.discount,
-    required this.price,
+    required this.priceWithDiscount,
+    required this.priceWithoutDiscount,
     required this.clinicID,
     required this.icon,
     required this.clinicName,
@@ -67,7 +69,8 @@ class ResponseEntity extends Equatable {
   List<Object> get props => [
         id,
         clinicID,
-        price,
+        priceWithDiscount,
+        priceWithoutDiscount,
         name,
         icon,
         rate,

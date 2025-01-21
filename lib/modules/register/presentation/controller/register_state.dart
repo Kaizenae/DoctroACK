@@ -17,7 +17,9 @@ class RegisterLoadingState extends RegisterState {
 
 class RegisterSuccessState extends RegisterState {
   final RegisterEntity registerEntity;
-  const RegisterSuccessState({required this.registerEntity});
+  const RegisterSuccessState({
+    required this.registerEntity,
+  });
 
   @override
   List<Object?> get props => [];

@@ -18,15 +18,14 @@ class RegisterCubit extends Cubit<RegisterState> {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> registerFun() async {
+  Future<void> registerFun({required String email}) async {
     emit(RegisterLoadingState());
 
     Either<Failure, RegisterEntity> response =
         await registerUsecase(RegisterParams(
-      email: emailController.text,
+      email: email,
       password: passwordController.text,
       userName: nameController.text,
       phone: phoneController.text,
@@ -34,8 +33,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     emit(response.fold(
         (failure) => RegisterErrorState(message: failure.message),
-        (registerEntity) =>
-            RegisterSuccessState(registerEntity: registerEntity)));
+        (registerEntity) => RegisterSuccessState(
+              registerEntity: registerEntity,
+            )));
   }
 
   String suffix = IconAssets.hide;

@@ -31,20 +31,20 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   Future<void> sendOTPFun() async {
     emit(SendOTPLoadingState());
 
-    Either<Failure, GeneralEntity> response = await sendOTPUsecase(StringParams(
-      string: emailController.text,
-    ));
+    Either<Failure, GeneralEntity> response = await sendOTPUsecase(
+        StringParams(string: emailController.text, email: ""));
 
     emit(response.fold((failure) => SendOTPErrorState(message: failure.message),
         (generalEntity) => SendOTPSuccessState(generalEntity: generalEntity)));
   }
 
-  Future<void> verifyOTPFun() async {
+  Future<void> verifyOTPFun({required String email}) async {
     emit(VerifyOTPLoadingState());
 
     Either<Failure, GeneralEntity> response =
         await verifyOTPUsecase(StringParams(
       string: otpController.text,
+      email: email,
     ));
 
     emit(response.fold(

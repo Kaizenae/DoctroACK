@@ -9,6 +9,7 @@ abstract class ForgetPasswordRemoteDataSource {
 
   Future<GeneralModel> verifyOTP({
     required String otp,
+    required String email,
   });
 
   Future<GeneralModel> newPassword({
@@ -39,12 +40,11 @@ class ForgetPasswordRemoteDataSourceImpl
   @override
   Future<GeneralModel> verifyOTP({
     required String otp,
+    required String email,
   }) async {
     final response = await apiConsumer.post(EndPoints.verifyOtpUrl, body: {
       "jsonrpc": "2.0",
-      "params": {
-        "otp": otp,
-      }
+      "params": {"otp": otp, "email": email}
     });
     return GeneralModel.fromJson(response);
   }

@@ -45,7 +45,6 @@ import '../../vendor_modules/vendor_clinic/presentaion/widgets/bank_details.dart
 import '../widgets/app_bar/app_bar_custom.dart';
 import '../../modules/forget_password/presentation/screens/forget_password_screen.dart';
 import '../../modules/forget_password/presentation/screens/new_password_screen.dart';
-import '../../modules/forget_password/presentation/screens/verification_code_screen.dart';
 import '../../modules/login/presentation/screens/login_screen.dart';
 import '../../modules/register/presentation/screens/register_screen.dart';
 import '../widgets/scaffold_custom/scaffold_custom.dart';
@@ -59,7 +58,6 @@ class Routes {
   static const String splashRoute = "/";
   static const String registerRoute = "register";
   static const String forgetPasswordRoute = "forgetPasswordScreen";
-  static const String verificationCodeRoute = "verificationCodeScreen";
   static const String newPasswordRoute = "newPasswordScreen";
   static const String successRoute = "successScreen";
   static const String mainRoute = "mainRoute";
@@ -136,8 +134,7 @@ class RoutesMap {
       Routes.registerRoute: (BuildContext context) => const RegisterScreen(),
       Routes.forgetPasswordRoute: (BuildContext context) =>
           const ForgetPasswordScreen(),
-      Routes.verificationCodeRoute: (BuildContext context) =>
-          const VerificationCodeScreen(),
+
       Routes.newPasswordRoute: (BuildContext context) =>
           const NewPasswordScreen(),
       Routes.successRoute: (BuildContext context) => const SuccessScreen(),
@@ -218,9 +215,6 @@ class RoutesMap {
         return const RegisterScreen();
       case Routes.forgetPasswordRoute:
         return const ForgetPasswordScreen();
-
-      case Routes.verificationCodeRoute:
-        return const VerificationCodeScreen();
 
       case Routes.newPasswordRoute:
         return const NewPasswordScreen();

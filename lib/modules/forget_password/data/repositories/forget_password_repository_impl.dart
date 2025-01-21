@@ -61,11 +61,14 @@ class ForgetPasswordRepositoryImpl implements ForgetPasswordRepository {
 
   @override
   Future<Either<Failure, GeneralEntity>> verifyOtp(
-      StringParams forgetPasswordParams) async {
+    StringParams forgetPasswordParams,
+  ) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteForgetPassword = await forgetPasswordRemoteDataSource
-            .verifyOTP(otp: forgetPasswordParams.string);
+        final remoteForgetPassword =
+            await forgetPasswordRemoteDataSource.verifyOTP(
+                otp: forgetPasswordParams.string,
+                email: forgetPasswordParams.email);
         if (remoteForgetPassword.generalEntity.status == true) {
           // await  forgetPasswordLocalDataSource.cacheForgetPassword(remoteForgetPassword);
           return Right(remoteForgetPassword);

@@ -77,7 +77,7 @@ class StripeWidget extends StatelessWidget {
                                   context,
                                   PaymentCubit.get(context).calculateAmount(
                                       state.serviceEntity.resultEntity.response
-                                          .price
+                                          .priceWithDiscount
                                           .round()));
                               Future.delayed(
                                 const Duration(milliseconds: 20),

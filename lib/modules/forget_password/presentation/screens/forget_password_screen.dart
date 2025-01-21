@@ -16,6 +16,7 @@ import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
+import 'verification_code_screen.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -35,8 +36,17 @@ class ForgetPasswordScreen extends StatelessWidget {
             value: BlocProvider.of<ForgetPasswordCubit>(context),
             child: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
+                var cubit = ForgetPasswordCubit.get(context);
+
                 if (state is SendOTPSuccessState) {
-                  navigator(context, Routes.verificationCodeRoute);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VerificationCodeScreen(
+                          isRegister: false,
+                          email: cubit.emailController.text,
+                        ),
+                      ));
                   showToast(context,
                       message: LocaleKeys.toastOTPSent.tr(),
                       type: MessageType.success);

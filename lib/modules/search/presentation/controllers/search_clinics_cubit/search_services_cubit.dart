@@ -29,7 +29,7 @@ class SearchServicesCubit extends Cubit<SearchServicesState> {
     emit(GetSearchServicesLoadingState());
     Either<Failure, SearchServicesEntity> response =
         await searchServicesUsecase(
-            StringParams(string: searchController.text));
+            StringParams(string: searchController.text, email: ""));
 
     emit(response.fold(
         (failure) => GetSearchServicesErrorState(message: failure.message),

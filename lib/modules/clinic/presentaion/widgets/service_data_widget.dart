@@ -73,11 +73,8 @@ class ServiceDataWidget extends StatelessWidget {
                                       bottomRight:
                                           Radius.circular(AppSize.s30.r)),
                                   child: CachedNetworkImageCustom(
-                                    url: state
-                                        .serviceEntity
-                                        .resultEntity
-                                        .response
-                                        .icon,
+                                    url: state.serviceEntity.resultEntity
+                                        .response.icon,
                                     width: AppSize.s70.w,
                                     height: AppSize.s80.h,
                                     boxFit: BoxFit.fill,
@@ -135,16 +132,59 @@ class ServiceDataWidget extends StatelessWidget {
                   SizedBox(
                     height: AppSize.s10.h,
                   ),
-                  TextCustom(
-                    text:
-                        '${LocaleKeys.aED.tr()} ${state.serviceEntity.resultEntity.response.price.toStringAsFixed(0)}',
-                    textAlign: TextAlign.start,
-                    textStyle: getSemiBoldGilroyStyle(
-                      color: ColorManager.primary,
-                      fontSize: FontSize.s20,
-
-                      // height: 0.05,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      state.serviceEntity.resultEntity.response.discount != 0
+                          ? Row(
+                              children: [
+                                TextCustom(
+                                  text:
+                                      '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
+                                  textAlign: TextAlign.start,
+                                  decoration: TextDecoration.lineThrough,
+                                  textStyle: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    color: ColorManager.primary,
+                                    fontSize: FontSize.s18,
+                                    fontFamily: 'Gilroy-SemiBold',
+                                    fontWeight: FontWeightManager.semiBold,
+                                    // height: 0.05,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                TextCustom(
+                                  text:
+                                      '${state.serviceEntity.resultEntity.response.discount.toStringAsFixed(0)}%',
+                                  textAlign: TextAlign.start,
+                                  decoration: TextDecoration.lineThrough,
+                                  textStyle: TextStyle(
+                                    color: ColorManager.primary,
+                                    fontSize: FontSize.s18,
+                                    fontFamily: 'Gilroy-SemiBold',
+                                    fontWeight: FontWeightManager.semiBold,
+                                    // height: 0.05,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const SizedBox(),
+                      TextCustom(
+                        text:
+                            '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
+                        textAlign: TextAlign.start,
+                        decoration: TextDecoration.lineThrough,
+                        textStyle: TextStyle(
+                          color: ColorManager.primary,
+                          fontSize: FontSize.s18,
+                          fontFamily: 'Gilroy-SemiBold',
+                          fontWeight: FontWeightManager.semiBold,
+                          // height: 0.05,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: AppSize.s20.h,

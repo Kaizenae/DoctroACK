@@ -353,18 +353,67 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                               ],
                             ),
                           ),
-                          TextCustom(
-                            text:
-                                '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.price.toStringAsFixed(0)}',
-                            textAlign: TextAlign.start,
-                            textStyle: TextStyle(
-                              color: ColorManager.primary,
-                              fontSize: FontSize.s18,
-                              fontFamily: 'Gilroy-SemiBold',
-                              fontWeight: FontWeightManager.semiBold,
-                              // height: 0.05,
-                            ),
-                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              state.serviceEntity.resultEntity.response
+                                          .discount !=
+                                      0
+                                  ? Row(
+                                      children: [
+                                        TextCustom(
+                                          text:
+                                              '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
+                                          textAlign: TextAlign.start,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                          textStyle: TextStyle(
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            color: ColorManager.primary,
+                                            fontSize: FontSize.s18,
+                                            fontFamily: 'Gilroy-SemiBold',
+                                            fontWeight:
+                                                FontWeightManager.semiBold,
+                                            // height: 0.05,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        TextCustom(
+                                          text:
+                                              '${state.serviceEntity.resultEntity.response.discount.toStringAsFixed(0)}%',
+                                          textAlign: TextAlign.start,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                          textStyle: TextStyle(
+                                            color: ColorManager.primary,
+                                            fontSize: FontSize.s18,
+                                            fontFamily: 'Gilroy-SemiBold',
+                                            fontWeight:
+                                                FontWeightManager.semiBold,
+                                            // height: 0.05,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                              TextCustom(
+                                text:
+                                    '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
+                                textAlign: TextAlign.start,
+                                decoration: TextDecoration.lineThrough,
+                                textStyle: TextStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: FontSize.s18,
+                                  fontFamily: 'Gilroy-SemiBold',
+                                  fontWeight: FontWeightManager.semiBold,
+                                  // height: 0.05,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -704,7 +753,7 @@ class AboutServiceWidget extends StatelessWidget {
                                     CreateReservationOrderCubit.get(context)
                                             .price =
                                         state.serviceEntity.resultEntity
-                                            .response.price
+                                            .response.priceWithDiscount
                                             .toStringAsFixed(0);
                                     navigator(context, Routes.scheduleRoute);
                                   } else {

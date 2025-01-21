@@ -18,7 +18,10 @@ import '../controller/forget_password_cubit.dart';
 import '../controller/forget_password_state.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
-  const VerificationCodeScreen({super.key});
+  const VerificationCodeScreen(
+      {super.key, required this.isRegister, required this.email});
+  final bool isRegister;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +39,17 @@ class VerificationCodeScreen extends StatelessWidget {
             child: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
                 if (state is VerifyOTPSuccessState) {
-                  navigator(context, Routes.newPasswordRoute);
-                  showToast(context,
-                      message: LocaleKeys.toastOTPVerified.tr(),
-                      type: MessageType.success);
+                  if (isRegister) {
+                    navigator(context, Routes.loginRoute);
+                    showToast(context,
+                        message: LocaleKeys.toastOTPVerified.tr(),
+                        type: MessageType.success);
+                  } else {
+                    navigator(context, Routes.newPasswordRoute);
+                    showToast(context,
+                        message: LocaleKeys.toastOTPVerified.tr(),
+                        type: MessageType.success);
+                  }
                 } else if (state is VerifyOTPErrorState) {
                   showToast(context,
                       message: state.message, type: MessageType.error);
@@ -138,7 +148,7 @@ class VerificationCodeScreen extends StatelessWidget {
                       onCompleted: (pin) {
                         cubit.otpController.text = pin;
 
-                        cubit.verifyOTPFun();
+                        cubit.verifyOTPFun(email: email);
                       },
                     ),
                     const RSizedBox.vertical(AppSize.s28),
@@ -172,7 +182,7 @@ class VerificationCodeScreen extends StatelessWidget {
                           )
                         : ElevatedButtonCustom(
                             onPressed: () {
-                              cubit.verifyOTPFun();
+                              cubit.verifyOTPFun(email: email);
                             },
                             text: LocaleKeys.submit,
                           ),

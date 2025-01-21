@@ -157,13 +157,15 @@ class ContactUsParams extends Equatable {
 
 class StringParams extends Equatable {
   final String string;
+  final String email;
 
   const StringParams({
     required this.string,
+    required this.email,
   });
 
   @override
-  List<Object> get props => [string];
+  List<Object> get props => [string, email];
 }
 
 class SendNotificationParams extends Equatable {

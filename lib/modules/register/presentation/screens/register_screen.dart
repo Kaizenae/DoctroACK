@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 import 'package:doctor_ack/core/utils/styles_manager.dart';
 import 'package:doctor_ack/languages/locale_keys.g.dart';
@@ -16,11 +18,19 @@ import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 
 import '../../../../injection_container.dart';
+import '../../../forget_password/presentation/screens/verification_code_screen.dart';
 import '../controller/register_cubit.dart';
 import '../controller/register_state.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +45,15 @@ class RegisterScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is RegisterSuccessState) {
               showToast(context,
-                  message: LocaleKeys.toastRegister.tr(),
+                  message: LocaleKeys.pleaseCheckEmail.tr(),
                   type: MessageType.success);
-              navigatorAndRemove(context, Routes.loginRoute);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                return VerificationCodeScreen(
+                  isRegister: true,
+                  email: emailController.text,
+                );
+              }));
             } else if (state is RegisterErrorState) {
               showToast(context,
                   message: state.message, type: MessageType.error);
@@ -119,7 +135,7 @@ class RegisterScreen extends StatelessWidget {
                           radius: AppSize.s24.r,
                           fillColor: ColorManager.white,
                           hint: LocaleKeys.enterEmail.tr(),
-                          controller: registerCubit.emailController,
+                          controller: emailController,
                           validate: (value) {
                             if (value!.trim().isEmpty || value == ' ') {
                               return LocaleKeys.emailTextField.tr();
@@ -216,9 +232,9 @@ class RegisterScreen extends StatelessWidget {
                                       onPressed: () {
                                         if (registerCubit.formKey.currentState!
                                             .validate()) {
-                                          registerCubit.registerFun();
-                                          registerCubit.formKey.currentState
-                                              ?.reset();
+                                          registerCubit.registerFun(
+                                            email: emailController.text,
+                                          );
                                         }
                                       },
                                     ),
