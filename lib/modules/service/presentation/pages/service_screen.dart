@@ -381,19 +381,44 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        TextCustom(
-                                          text:
-                                              '${state.serviceEntity.resultEntity.response.discount.toStringAsFixed(0)}%',
-                                          textAlign: TextAlign.start,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          textStyle: TextStyle(
-                                            color: ColorManager.primary,
-                                            fontSize: FontSize.s18,
-                                            fontFamily: 'Gilroy-SemiBold',
-                                            fontWeight:
-                                                FontWeightManager.semiBold,
-                                            // height: 0.05,
+                                        Visibility(
+                                          visible: state
+                                                  .serviceEntity
+                                                  .resultEntity
+                                                  .response
+                                                  .discount !=
+                                              0.0,
+                                          child: Positioned(
+                                            top: AppSize.s0,
+                                            right: AppSize.s2,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SvgPictureCustom(
+                                                  assetsName:
+                                                      IconAssets.rectangleDisc,
+                                                  color: null,
+                                                  height: AppSize.s28.h,
+                                                  width: AppSize.s60.w,
+                                                ),
+                                                Positioned(
+                                                  top: AppSize.s4,
+                                                  child: TextCustom(
+                                                    text:
+                                                        '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
+                                                    textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: FontSize.s12,
+                                                      fontFamily: 'SF Pro Text',
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      height: 0,
+                                                      letterSpacing: -0.24,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],

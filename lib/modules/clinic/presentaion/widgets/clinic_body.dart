@@ -501,7 +501,7 @@ class ClinicBody extends StatelessWidget {
                                                                     child:
                                                                         TextCustom(
                                                                       text:
-                                                                          '${(state.clinicEntity.resultEntity.response.services[index].discount / state.clinicEntity.resultEntity.response.services[index].price) * 100}% ${LocaleKeys.off.tr()}',
+                                                                          '${state.clinicEntity.resultEntity.response.services[index].discount}% ${LocaleKeys.off.tr()}',
                                                                       textStyle:
                                                                           TextStyle(
                                                                         color: Colors

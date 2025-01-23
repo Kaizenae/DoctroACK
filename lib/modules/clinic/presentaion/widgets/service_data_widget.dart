@@ -132,43 +132,69 @@ class ServiceDataWidget extends StatelessWidget {
                   SizedBox(
                     height: AppSize.s10.h,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       state.serviceEntity.resultEntity.response.discount != 0
-                          ? Row(
-                              children: [
-                                TextCustom(
-                                  text:
-                                      '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
-                                  textAlign: TextAlign.start,
-                                  decoration: TextDecoration.lineThrough,
-                                  textStyle: TextStyle(
-                                    decoration: TextDecoration.lineThrough,
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s18,
-                                    fontFamily: 'Gilroy-SemiBold',
-                                    fontWeight: FontWeightManager.semiBold,
-                                    // height: 0.05,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextCustom(
-                                  text:
-                                      '${state.serviceEntity.resultEntity.response.discount.toStringAsFixed(0)}%',
-                                  textAlign: TextAlign.start,
-                                  decoration: TextDecoration.lineThrough,
-                                  textStyle: TextStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s18,
-                                    fontFamily: 'Gilroy-SemiBold',
-                                    fontWeight: FontWeightManager.semiBold,
-                                    // height: 0.05,
-                                  ),
-                                ),
-                              ],
+                          ? TextCustom(
+                              text:
+                                  '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
+                              textAlign: TextAlign.start,
+                              decoration: TextDecoration.lineThrough,
+                              textStyle: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: ColorManager.primary,
+                                fontSize: FontSize.s18,
+                                fontFamily: 'Gilroy-SemiBold',
+                                fontWeight: FontWeightManager.semiBold,
+                                // height: 0.05,
+                              ),
+                            )
+                          : const SizedBox(),
+                      state.serviceEntity.resultEntity.response.discount != 0.0
+                          ? const SizedBox(
+                              width: 5,
+                            )
+                          : const SizedBox(),
+                      // Visibility(
+                      //   visible: state
+                      //           .serviceEntity.resultEntity.response.discount !=
+                      //       0.0,
+                      //   child: Positioned(
+                      //     top: AppSize.s0,
+                      //     right: AppSize.s2,
+                      //     child: Stack(
+                      //       alignment: Alignment.center,
+                      //       children: [
+                      //         SvgPictureCustom(
+                      //           assetsName: IconAssets.rectangleDisc,
+                      //           color: null,
+                      //           height: AppSize.s28.h,
+                      //           width: AppSize.s60.w,
+                      //         ),
+                      //         Positioned(
+                      //           top: AppSize.s4,
+                      //           child: TextCustom(
+                      //             text:
+                      //                 '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
+                      //             textStyle: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: FontSize.s12,
+                      //               fontFamily: 'SF Pro Text',
+                      //               fontWeight: FontWeight.w600,
+                      //               height: 0,
+                      //               letterSpacing: -0.24,
+                      //             ),
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+
+                      state.serviceEntity.resultEntity.response.discount != 0.0
+                          ? const SizedBox(
+                              width: 5,
                             )
                           : const SizedBox(),
                       TextCustom(
