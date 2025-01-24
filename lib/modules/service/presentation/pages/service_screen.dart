@@ -299,145 +299,153 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                           SizedBox(
                             width: AppSize.s4.w,
                           ),
-                          InkWell(
-                            onTap: () {
-                              ClinicCubit.get(context).clinicID = state
-                                  .serviceEntity.resultEntity.response.clinicID;
-                              navigator(context, Routes.clinicRoute);
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: (AppSize.s100 * 2).w,
-                                  child: TextCustom(
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    textStyle: TextStyle(
-                                      fontFamily: 'Gilroy',
-                                      fontSize: FontSize.s18,
-                                      fontWeight: FontWeightManager.medium,
-                                      height: 0,
-                                      letterSpacing: -0.36,
-                                    ),
-                                    text: state.serviceEntity.resultEntity
-                                        .response.clinicName,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPictureCustom(
-                                      height: AppSize.s14.h,
-                                      width: AppSize.s14.w,
-                                      assetsName: IconAssets.locationIcon,
-                                      color: ColorManager.grey,
-                                    ),
-                                    SizedBox(
-                                      width: AppSize.s4.w,
-                                    ),
-                                    TextCustom(
-                                      text: state.serviceEntity.resultEntity
-                                          .response.city,
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                ClinicCubit.get(context).clinicID = state
+                                    .serviceEntity
+                                    .resultEntity
+                                    .response
+                                    .clinicID;
+                                navigator(context, Routes.clinicRoute);
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: (AppSize.s100 * 2).w,
+                                    child: TextCustom(
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
                                       textStyle: TextStyle(
                                         fontFamily: 'Gilroy',
-                                        fontSize: FontSize.s12,
-                                        color: ColorManager.grey,
-                                        fontWeight: FontWeightManager.regular,
+                                        fontSize: FontSize.s18,
+                                        fontWeight: FontWeightManager.medium,
+                                        height: 0,
+                                        letterSpacing: -0.36,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                      text: state.serviceEntity.resultEntity
+                                          .response.clinicName,
                                     ),
-                                  ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      SvgPictureCustom(
+                                        height: AppSize.s14.h,
+                                        width: AppSize.s14.w,
+                                        assetsName: IconAssets.locationIcon,
+                                        color: ColorManager.grey,
+                                      ),
+                                      SizedBox(
+                                        width: AppSize.s4.w,
+                                      ),
+                                      TextCustom(
+                                        text: state.serviceEntity.resultEntity
+                                            .response.city,
+                                        textStyle: TextStyle(
+                                          fontFamily: 'Gilroy',
+                                          fontSize: FontSize.s12,
+                                          color: ColorManager.grey,
+                                          fontWeight: FontWeightManager.regular,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                state.serviceEntity.resultEntity.response
+                                            .discount !=
+                                        0
+                                    ? Row(
+                                        children: [
+                                          TextCustom(
+                                            text:
+                                                '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
+                                            textAlign: TextAlign.start,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            textStyle: TextStyle(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              color: ColorManager.primary,
+                                              fontSize: FontSize.s18,
+                                              fontFamily: 'Gilroy-SemiBold',
+                                              fontWeight:
+                                                  FontWeightManager.semiBold,
+                                              // height: 0.05,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Visibility(
+                                            visible: state
+                                                    .serviceEntity
+                                                    .resultEntity
+                                                    .response
+                                                    .discount !=
+                                                0.0,
+                                            child: Positioned(
+                                              top: AppSize.s0,
+                                              right: AppSize.s2,
+                                              child: Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  SvgPictureCustom(
+                                                    assetsName: IconAssets
+                                                        .rectangleDisc,
+                                                    color: null,
+                                                    height: AppSize.s28.h,
+                                                    width: AppSize.s60.w,
+                                                  ),
+                                                  Positioned(
+                                                    top: AppSize.s4,
+                                                    child: TextCustom(
+                                                      text:
+                                                          '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
+                                                      textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: FontSize.s12,
+                                                        fontFamily:
+                                                            'SF Pro Text',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        height: 0,
+                                                        letterSpacing: -0.24,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const SizedBox(),
+                                TextCustom(
+                                  text:
+                                      '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
+                                  textAlign: TextAlign.start,
+                                  decoration: TextDecoration.lineThrough,
+                                  textStyle: TextStyle(
+                                    color: ColorManager.primary,
+                                    fontSize: FontSize.s18,
+                                    fontFamily: 'Gilroy-SemiBold',
+                                    fontWeight: FontWeightManager.semiBold,
+                                    // height: 0.05,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              state.serviceEntity.resultEntity.response
-                                          .discount !=
-                                      0
-                                  ? Row(
-                                      children: [
-                                        TextCustom(
-                                          text:
-                                              '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
-                                          textAlign: TextAlign.start,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          textStyle: TextStyle(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            color: ColorManager.primary,
-                                            fontSize: FontSize.s18,
-                                            fontFamily: 'Gilroy-SemiBold',
-                                            fontWeight:
-                                                FontWeightManager.semiBold,
-                                            // height: 0.05,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Visibility(
-                                          visible: state
-                                                  .serviceEntity
-                                                  .resultEntity
-                                                  .response
-                                                  .discount !=
-                                              0.0,
-                                          child: Positioned(
-                                            top: AppSize.s0,
-                                            right: AppSize.s2,
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                SvgPictureCustom(
-                                                  assetsName:
-                                                      IconAssets.rectangleDisc,
-                                                  color: null,
-                                                  height: AppSize.s28.h,
-                                                  width: AppSize.s60.w,
-                                                ),
-                                                Positioned(
-                                                  top: AppSize.s4,
-                                                  child: TextCustom(
-                                                    text:
-                                                        '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
-                                                    textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: FontSize.s12,
-                                                      fontFamily: 'SF Pro Text',
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      height: 0,
-                                                      letterSpacing: -0.24,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : const SizedBox(),
-                              TextCustom(
-                                text:
-                                    '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
-                                textAlign: TextAlign.start,
-                                decoration: TextDecoration.lineThrough,
-                                textStyle: TextStyle(
-                                  color: ColorManager.primary,
-                                  fontSize: FontSize.s18,
-                                  fontFamily: 'Gilroy-SemiBold',
-                                  fontWeight: FontWeightManager.semiBold,
-                                  // height: 0.05,
-                                ),
-                              ),
-                            ],
                           )
                         ],
                       ),

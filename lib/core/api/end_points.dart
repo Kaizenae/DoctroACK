@@ -65,7 +65,7 @@ class EndPoints {
   static const String contactUsUrl = '${odooBaseUrl}contact_us';
 
   static const String createReservationEndpoint =
-      '${odooBaseUrl}post_appointment';
+      '${odooBaseUrl}post_mobile_appointment';
   static const String cancelReservationEndpoint =
       '${odooBaseUrl}cancel_appointment';
   static const String changeReservationEndpoint =
