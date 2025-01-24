@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:device_preview/device_preview.dart';
 import 'package:doctor_ack/core/controller/notification_cubit/notification_cubit.dart';
 import 'package:doctor_ack/core/general_controllers/location_controller/location_cubit.dart';
 import 'package:doctor_ack/core/utils/color_manager.dart';
@@ -119,18 +122,21 @@ class _DoctorAckAppState extends State<DoctorAckApp> {
                 color: ColorManager.primary,
               )),
               child: MaterialApp(
+                useInheritedMediaQuery: true,
+                locale: DevicePreview.locale(context),
+                builder: DevicePreview.appBuilder,
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
-                locale: context.locale,
+                // locale: context.locale,
                 title: AppStrings.appName.tr(),
-                builder: (context, widget) {
-                  return MediaQuery(
-                    //Setting font does not change with system font size
-                    data: MediaQuery.of(context)
-                        .copyWith(textScaler: const TextScaler.linear(1.0)),
-                    child: widget!,
-                  );
-                },
+                // builder: (context, widget) {
+                //   return MediaQuery(
+                //     //Setting font does not change with system font size
+                //     data: MediaQuery.of(context)
+                //         .copyWith(textScaler: const TextScaler.linear(1.0)),
+                //     child: widget!,
+                //   );
+                // },
                 navigatorKey: navigatorkey,
                 routes: RoutesMap.routesMap(),
                 initialRoute: Routes.splashRoute,

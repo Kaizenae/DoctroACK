@@ -73,20 +73,20 @@ class ClinicCardWidget extends StatelessWidget {
                     width: AppSize.s60.h,
                     url: imageUrl!,
                     boxFit: BoxFit.fill),
-            SizedBox(
-              height: AppSize.s6.h,
+            const SizedBox(
+              height: AppSize.s6,
             ),
             TextCustom(
               text: name!,
               fontSize: FontSize.s16,
               color: ColorManager.white,
             ),
-            SizedBox(
-              height: AppSize.s6.h,
+            const SizedBox(
+              height: AppSize.s6,
             ),
             SizedBox(
               width: (AppSize.s100 * 1.4).w,
-              height: AppSize.s40.h,
+              height: AppSize.s20.h,
               child: TextCustom(
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -100,31 +100,36 @@ class ClinicCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: AppSize.s6.h,
+            const SizedBox(
+              height: AppSize.s6,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    const SvgPictureCustom(
-                      assetsName: IconAssets.locationIcon,
-                      color: ColorManager.white,
-                    ),
-                    SizedBox(
-                      width: AppSize.s4.w,
-                    ),
-                    TextCustom(
-                      text: city!,
-                      textStyle: TextStyle(
-                        fontFamily: 'Gilroy',
-                        fontSize: FontSize.s12,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const SvgPictureCustom(
+                        assetsName: IconAssets.locationIcon,
                         color: ColorManager.white,
-                        fontWeight: FontWeightManager.semiBold,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: AppSize.s4.w,
+                      ),
+                      Expanded(
+                        child: TextCustom(
+                          text: city!,
+                          textStyle: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontFamily: 'Gilroy',
+                            fontSize: FontSize.s12,
+                            color: ColorManager.white,
+                            fontWeight: FontWeightManager.semiBold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [

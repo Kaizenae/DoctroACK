@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:doctor_ack/core/app.dart';
 import 'package:doctor_ack/core/controller/database_helper.dart';
 // import 'package:doctor_ack/core/controller/firebase_api.dart';
@@ -7,6 +8,7 @@ import 'package:doctor_ack/core/local/cache_helper.dart';
 import 'package:doctor_ack/core/utils/constants_manager.dart';
 import 'package:doctor_ack/core/utils/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -72,9 +74,13 @@ Future<void> main() async {
   AppConstants.expireToken =
       CacheHelper.get(key: AppStrings.cachedExpireToken) ?? '';
   AppConstants.type = CacheHelper.get(key: AppStrings.cachedType) ?? '';
-  runApp(EasyLocalization(
-      supportedLocales: L10n.all,
-      path: 'assets/languages',
-      fallbackLocale: L10n.all[0],
-      child: const DoctorAckApp()));
+  runApp(
+    DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => (EasyLocalization(
+            supportedLocales: L10n.all,
+            path: 'assets/languages',
+            fallbackLocale: L10n.all[0],
+            child: const DoctorAckApp()))),
+  );
 }

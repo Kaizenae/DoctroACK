@@ -58,412 +58,429 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
           builder: (context, state) {
             var serviceCubit = ServiceCubit.get(context);
             return switch (state) {
-              GetServiceSuccessState() => Column(
-                  children: [
-                    SizedBox(
-                      height: (AppSize.s100 * 2.6).h,
-                      width: context.width,
-                      child: Stack(
-                        children: [
-                          Container(
-                            color: ColorManager.pink,
-                            height: (AppSize.s100 * 2.3).h,
-                            width: context.width,
-                          ),
-                          Positioned(
-                            bottom: AppSize.s30.h,
-                            right: AppSize.s70.w,
-                            child: CachedNetworkImageCustom(
-                                width: (AppSize.s100 * 2.2),
-                                height: (AppSize.s100 * 1.6).h,
-                                boxFit: BoxFit.fill,
-                                url: state
-                                    .serviceEntity.resultEntity.response.icon),
-                          ),
-                          Positioned(
-                            top: AppSize.s10,
-                            child: SizedBox(
+              GetServiceSuccessState() => SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: (AppSize.s100 * 2.6).h,
+                        width: context.width,
+                        child: Stack(
+                          children: [
+                            Container(
+                              color: ColorManager.pink,
+                              height: (AppSize.s100 * 2.3).h,
                               width: context.width,
-                              child: Padding(
-                                padding: EdgeInsets.all(AppPadding.p16),
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                        onTap: () {
-                                          Navigator.pop(context);
+                            ),
+                            Positioned(
+                              bottom: AppSize.s30.h,
+                              right: AppSize.s70.w,
+                              child: CachedNetworkImageCustom(
+                                  width: (AppSize.s100 * 2.2),
+                                  height: (AppSize.s100 * 1.6).h,
+                                  boxFit: BoxFit.fill,
+                                  url: state.serviceEntity.resultEntity.response
+                                      .icon),
+                            ),
+                            Positioned(
+                              top: AppSize.s10,
+                              child: SizedBox(
+                                width: context.width,
+                                child: Padding(
+                                  padding: EdgeInsets.all(AppPadding.p16),
+                                  child: Row(
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: SvgPictureCustom(
+                                            assetsName: AppConstants.language
+                                                ? IconAssets.arrowRight
+                                                : IconAssets.arrowLeft,
+                                            color: ColorManager.black,
+                                          )),
+                                      const SizedBox(
+                                        width: AppSize.s10,
+                                      ),
+                                      Expanded(
+                                        child: TextCustom(
+                                          text: state.serviceEntity.resultEntity
+                                              .response.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          textStyle: TextStyle(
+                                            fontSize: FontSize.s18,
+                                            fontFamily: 'Marcellus',
+                                            fontWeight:
+                                                FontWeightManager.medium,
+                                            height: 0,
+                                            letterSpacing: -0.36,
+                                          ),
+                                        ),
+                                      ),
+                                      BlocBuilder<ToggleCubit, ToggleState>(
+                                        builder: (context, toggleState) {
+                                          var toggleCubit =
+                                              ToggleCubit.get(context);
+                                          return BlocConsumer<
+                                              AddRemoveFavouritesCubit,
+                                              AddRemoveFavouritesState>(
+                                            listener: (context, state) {
+                                              if (state
+                                                  is AddRemoveFavouriteSuccessState) {
+                                                if (toggleCubit.isFavourite) {
+                                                  FavouritesCubit.get(context)
+                                                      .getFavourite();
+                                                  showToast(context,
+                                                      message: LocaleKeys
+                                                          .toastTreatmentFavourite
+                                                          .tr(),
+                                                      type:
+                                                          MessageType.success);
+                                                } else {
+                                                  showToast(context,
+                                                      message: LocaleKeys
+                                                          .toastRemoveFavourite
+                                                          .tr(),
+                                                      type:
+                                                          MessageType.success);
+                                                }
+                                              } else if (state
+                                                  is AddRemoveFavouriteErrorState) {
+                                                showToast(context,
+                                                    message: state.message,
+                                                    type: MessageType.error);
+                                              }
+                                            },
+                                            builder: (context, favState) {
+                                              var removeFavCubit =
+                                                  AddRemoveFavouritesCubit.get(
+                                                      context);
+                                              return InkWell(
+                                                onTap: () {
+                                                  removeFavCubit.id = state
+                                                      .serviceEntity
+                                                      .resultEntity
+                                                      .response
+                                                      .id;
+                                                  removeFavCubit.isClinic =
+                                                      false;
+                                                  removeFavCubit.endpoint = toggleCubit
+                                                          .isFavourite
+                                                      ? EndPoints
+                                                          .removeFavouriteEndpoint
+                                                      : EndPoints
+                                                          .addFavouriteEndpoint;
+                                                  toggleCubit.toggleFav();
+
+                                                  removeFavCubit
+                                                      .addRemoveFavourite();
+                                                },
+                                                child: Container(
+                                                  width: AppSize.s34.w,
+                                                  height: AppSize.s34.w,
+                                                  padding: EdgeInsets.all(
+                                                      AppPadding.p6),
+                                                  decoration: ShapeDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(
+                                                            0.6000000238418579),
+                                                    shape: const OvalBorder(),
+                                                  ),
+                                                  child: SvgPictureCustom(
+                                                    assetsName: toggleCubit
+                                                            .isFavourite
+                                                        ? IconAssets.favorite
+                                                        : IconAssets.heart,
+                                                    color:
+                                                        toggleCubit.isFavourite
+                                                            ? ColorManager.red
+                                                            : null,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: AppSize.s10,
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          shareFun(
+                                            name: state.serviceEntity
+                                                .resultEntity.response.name
+                                                .toString(),
+                                          );
                                         },
                                         child: SvgPictureCustom(
-                                          assetsName: AppConstants.language
-                                              ? IconAssets.arrowRight
-                                              : IconAssets.arrowLeft,
-                                          color: ColorManager.black,
-                                        )),
-                                    const SizedBox(
-                                      width: AppSize.s10,
-                                    ),
-                                    Expanded(
-                                      child: TextCustom(
-                                        text: state.serviceEntity.resultEntity
-                                            .response.name,
-                                        overflow: TextOverflow.ellipsis,
+                                          assetsName: IconAssets.share,
+                                          color: null,
+                                          height: AppSize.s34.h,
+                                          width: AppSize.s34.h,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: AppSize.s12,
+                              right: AppSize.s18,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: AppPadding.p10,
+                                    vertical: AppPadding.p8),
+                                height: AppSize.s40.h,
+                                width: AppSize.s80.w,
+                                decoration: ShapeDecoration(
+                                  color: ColorManager.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s50.r),
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    ReviewsCubit.get(context).isClinic = false;
+                                    ReviewsCubit.get(context).clinicID = state
+                                        .serviceEntity.resultEntity.response.id;
+                                    ReviewsCubit.get(context).clinicRate = state
+                                        .serviceEntity
+                                        .resultEntity
+                                        .response
+                                        .rate
+                                        .toStringAsFixed(1);
+                                    ReviewsCubit.get(context).clinicName = state
+                                        .serviceEntity
+                                        .resultEntity
+                                        .response
+                                        .name;
+                                    navigator(
+                                        context, Routes.clinicReviewsRoute);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SvgPictureCustom(
+                                        assetsName: IconAssets.star2,
+                                        color: null,
+                                        height: AppSize.s24.h,
+                                        width: AppSize.s24.w,
+                                      ),
+                                      TextCustom(
                                         textStyle: TextStyle(
+                                          fontFamily: 'Gilroy',
+                                          fontSize: FontSize.s20,
+                                          color: ColorManager.white,
+                                          fontWeight: FontWeightManager.regular,
+                                        ),
+                                        text: state.serviceEntity.resultEntity
+                                            .response.rate
+                                            .toStringAsFixed(1),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                        child: Row(
+                          children: [
+                            Container(
+                                width: AppSize.s40.h,
+                                height: AppSize.s40.h,
+                                padding: EdgeInsets.all(AppPadding.p10),
+                                decoration: ShapeDecoration(
+                                  color: ColorManager.caffe1,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s50.r),
+                                  ),
+                                ),
+                                child: const SvgPictureCustom(
+                                  assetsName: IconAssets.service1,
+                                  color: ColorManager.serviceIconColor,
+                                )),
+                            SizedBox(
+                              width: AppSize.s4.w,
+                            ),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  ClinicCubit.get(context).clinicID = state
+                                      .serviceEntity
+                                      .resultEntity
+                                      .response
+                                      .clinicID;
+                                  navigator(context, Routes.clinicRoute);
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: (AppSize.s100 * 2).w,
+                                      child: TextCustom(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textStyle: TextStyle(
+                                          fontFamily: 'Gilroy',
                                           fontSize: FontSize.s18,
-                                          fontFamily: 'Marcellus',
                                           fontWeight: FontWeightManager.medium,
                                           height: 0,
                                           letterSpacing: -0.36,
                                         ),
+                                        text: state.serviceEntity.resultEntity
+                                            .response.clinicName,
                                       ),
                                     ),
-                                    BlocBuilder<ToggleCubit, ToggleState>(
-                                      builder: (context, toggleState) {
-                                        var toggleCubit =
-                                            ToggleCubit.get(context);
-                                        return BlocConsumer<
-                                            AddRemoveFavouritesCubit,
-                                            AddRemoveFavouritesState>(
-                                          listener: (context, state) {
-                                            if (state
-                                                is AddRemoveFavouriteSuccessState) {
-                                              if (toggleCubit.isFavourite) {
-                                                FavouritesCubit.get(context)
-                                                    .getFavourite();
-                                                showToast(context,
-                                                    message: LocaleKeys
-                                                        .toastTreatmentFavourite
-                                                        .tr(),
-                                                    type: MessageType.success);
-                                              } else {
-                                                showToast(context,
-                                                    message: LocaleKeys
-                                                        .toastRemoveFavourite
-                                                        .tr(),
-                                                    type: MessageType.success);
-                                              }
-                                            } else if (state
-                                                is AddRemoveFavouriteErrorState) {
-                                              showToast(context,
-                                                  message: state.message,
-                                                  type: MessageType.error);
-                                            }
-                                          },
-                                          builder: (context, favState) {
-                                            var removeFavCubit =
-                                                AddRemoveFavouritesCubit.get(
-                                                    context);
-                                            return InkWell(
-                                              onTap: () {
-                                                removeFavCubit.id = state
-                                                    .serviceEntity
-                                                    .resultEntity
-                                                    .response
-                                                    .id;
-                                                removeFavCubit.isClinic = false;
-                                                removeFavCubit
-                                                    .endpoint = toggleCubit
-                                                        .isFavourite
-                                                    ? EndPoints
-                                                        .removeFavouriteEndpoint
-                                                    : EndPoints
-                                                        .addFavouriteEndpoint;
-                                                toggleCubit.toggleFav();
-
-                                                removeFavCubit
-                                                    .addRemoveFavourite();
-                                              },
-                                              child: Container(
-                                                width: AppSize.s34.w,
-                                                height: AppSize.s34.w,
-                                                padding: EdgeInsets.all(
-                                                    AppPadding.p6),
-                                                decoration: ShapeDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(
-                                                          0.6000000238418579),
-                                                  shape: const OvalBorder(),
-                                                ),
-                                                child: SvgPictureCustom(
-                                                  assetsName:
-                                                      toggleCubit.isFavourite
-                                                          ? IconAssets.favorite
-                                                          : IconAssets.heart,
-                                                  color: toggleCubit.isFavourite
-                                                      ? ColorManager.red
-                                                      : null,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      width: AppSize.s10,
-                                    ),
-                                    InkWell(
-                                      onTap: () async {
-                                        shareFun(
-                                          name: state.serviceEntity.resultEntity
-                                              .response.name
-                                              .toString(),
-                                        );
-                                      },
-                                      child: SvgPictureCustom(
-                                        assetsName: IconAssets.share,
-                                        color: null,
-                                        height: AppSize.s34.h,
-                                        width: AppSize.s34.h,
-                                      ),
+                                    Row(
+                                      children: [
+                                        SvgPictureCustom(
+                                          height: AppSize.s14.h,
+                                          width: AppSize.s14.w,
+                                          assetsName: IconAssets.locationIcon,
+                                          color: ColorManager.grey,
+                                        ),
+                                        SizedBox(
+                                          width: AppSize.s4.w,
+                                        ),
+                                        TextCustom(
+                                          text: state.serviceEntity.resultEntity
+                                              .response.city,
+                                          textStyle: TextStyle(
+                                            fontFamily: 'Gilroy',
+                                            fontSize: FontSize.s12,
+                                            color: ColorManager.grey,
+                                            fontWeight:
+                                                FontWeightManager.regular,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: AppSize.s12,
-                            right: AppSize.s18,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: AppPadding.p10,
-                                  vertical: AppPadding.p8),
-                              height: AppSize.s40.h,
-                              width: AppSize.s80.w,
-                              decoration: ShapeDecoration(
-                                color: ColorManager.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s50.r),
-                                ),
-                              ),
-                              child: InkWell(
-                                onTap: () {
-                                  ReviewsCubit.get(context).isClinic = false;
-                                  ReviewsCubit.get(context).clinicID = state
-                                      .serviceEntity.resultEntity.response.id;
-                                  ReviewsCubit.get(context).clinicRate = state
-                                      .serviceEntity.resultEntity.response.rate
-                                      .toStringAsFixed(1);
-                                  ReviewsCubit.get(context).clinicName = state
-                                      .serviceEntity.resultEntity.response.name;
-                                  navigator(context, Routes.clinicReviewsRoute);
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SvgPictureCustom(
-                                      assetsName: IconAssets.star2,
-                                      color: null,
-                                      height: AppSize.s24.h,
-                                      width: AppSize.s24.w,
-                                    ),
-                                    TextCustom(
-                                      textStyle: TextStyle(
-                                        fontFamily: 'Gilroy',
-                                        fontSize: FontSize.s20,
-                                        color: ColorManager.white,
-                                        fontWeight: FontWeightManager.regular,
-                                      ),
-                                      text: state.serviceEntity.resultEntity
-                                          .response.rate
-                                          .toStringAsFixed(1),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p16),
-                      child: Row(
-                        children: [
-                          Container(
-                              width: AppSize.s40.h,
-                              height: AppSize.s40.h,
-                              padding: EdgeInsets.all(AppPadding.p10),
-                              decoration: ShapeDecoration(
-                                color: ColorManager.caffe1,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s50.r),
-                                ),
-                              ),
-                              child: const SvgPictureCustom(
-                                assetsName: IconAssets.service1,
-                                color: ColorManager.serviceIconColor,
-                              )),
-                          SizedBox(
-                            width: AppSize.s4.w,
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                ClinicCubit.get(context).clinicID = state
-                                    .serviceEntity
-                                    .resultEntity
-                                    .response
-                                    .clinicID;
-                                navigator(context, Routes.clinicRoute);
-                              },
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    width: (AppSize.s100 * 2).w,
-                                    child: TextCustom(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      textStyle: TextStyle(
-                                        fontFamily: 'Gilroy',
-                                        fontSize: FontSize.s18,
-                                        fontWeight: FontWeightManager.medium,
-                                        height: 0,
-                                        letterSpacing: -0.36,
-                                      ),
-                                      text: state.serviceEntity.resultEntity
-                                          .response.clinicName,
+                                  state.serviceEntity.resultEntity.response
+                                              .discount !=
+                                          0
+                                      ? Row(
+                                          children: [
+                                            TextCustom(
+                                              text:
+                                                  '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
+                                              textAlign: TextAlign.start,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              textStyle: TextStyle(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                color: ColorManager.primary,
+                                                fontSize: FontSize.s18,
+                                                fontFamily: 'Gilroy-SemiBold',
+                                                fontWeight:
+                                                    FontWeightManager.semiBold,
+                                                // height: 0.05,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Visibility(
+                                              visible: state
+                                                      .serviceEntity
+                                                      .resultEntity
+                                                      .response
+                                                      .discount !=
+                                                  0.0,
+                                              child: Positioned(
+                                                top: AppSize.s0,
+                                                right: AppSize.s2,
+                                                child: Stack(
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    SvgPictureCustom(
+                                                      assetsName: IconAssets
+                                                          .rectangleDisc,
+                                                      color: null,
+                                                      height: AppSize.s28.h,
+                                                      width: AppSize.s60.w,
+                                                    ),
+                                                    Positioned(
+                                                      top: AppSize.s4,
+                                                      child: TextCustom(
+                                                        text:
+                                                            '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
+                                                        textStyle: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              FontSize.s12,
+                                                          fontFamily:
+                                                              'SF Pro Text',
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          height: 0,
+                                                          letterSpacing: -0.24,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : const SizedBox(),
+                                  TextCustom(
+                                    text:
+                                        '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
+                                    textAlign: TextAlign.start,
+                                    decoration: TextDecoration.lineThrough,
+                                    textStyle: TextStyle(
+                                      color: ColorManager.primary,
+                                      fontSize: FontSize.s18,
+                                      fontFamily: 'Gilroy-SemiBold',
+                                      fontWeight: FontWeightManager.semiBold,
+                                      // height: 0.05,
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      SvgPictureCustom(
-                                        height: AppSize.s14.h,
-                                        width: AppSize.s14.w,
-                                        assetsName: IconAssets.locationIcon,
-                                        color: ColorManager.grey,
-                                      ),
-                                      SizedBox(
-                                        width: AppSize.s4.w,
-                                      ),
-                                      TextCustom(
-                                        text: state.serviceEntity.resultEntity
-                                            .response.city,
-                                        textStyle: TextStyle(
-                                          fontFamily: 'Gilroy',
-                                          fontSize: FontSize.s12,
-                                          color: ColorManager.grey,
-                                          fontWeight: FontWeightManager.regular,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                state.serviceEntity.resultEntity.response
-                                            .discount !=
-                                        0
-                                    ? Row(
-                                        children: [
-                                          TextCustom(
-                                            text:
-                                                '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithoutDiscount.toStringAsFixed(0)}',
-                                            textAlign: TextAlign.start,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            textStyle: TextStyle(
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              color: ColorManager.primary,
-                                              fontSize: FontSize.s18,
-                                              fontFamily: 'Gilroy-SemiBold',
-                                              fontWeight:
-                                                  FontWeightManager.semiBold,
-                                              // height: 0.05,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Visibility(
-                                            visible: state
-                                                    .serviceEntity
-                                                    .resultEntity
-                                                    .response
-                                                    .discount !=
-                                                0.0,
-                                            child: Positioned(
-                                              top: AppSize.s0,
-                                              right: AppSize.s2,
-                                              child: Stack(
-                                                alignment: Alignment.center,
-                                                children: [
-                                                  SvgPictureCustom(
-                                                    assetsName: IconAssets
-                                                        .rectangleDisc,
-                                                    color: null,
-                                                    height: AppSize.s28.h,
-                                                    width: AppSize.s60.w,
-                                                  ),
-                                                  Positioned(
-                                                    top: AppSize.s4,
-                                                    child: TextCustom(
-                                                      text:
-                                                          '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
-                                                      textStyle: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: FontSize.s12,
-                                                        fontFamily:
-                                                            'SF Pro Text',
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        height: 0,
-                                                        letterSpacing: -0.24,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    : const SizedBox(),
-                                TextCustom(
-                                  text:
-                                      '${LocaleKeys.aED.tr()}${state.serviceEntity.resultEntity.response.priceWithDiscount.toStringAsFixed(0)}',
-                                  textAlign: TextAlign.start,
-                                  decoration: TextDecoration.lineThrough,
-                                  textStyle: TextStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s18,
-                                    fontFamily: 'Gilroy-SemiBold',
-                                    fontWeight: FontWeightManager.semiBold,
-                                    // height: 0.05,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: AppSize.s20.h,
-                    ),
-                    AboutServiceWidget(
-                      advice: state.serviceEntity.resultEntity.response.advice
-                              .isNotEmpty
-                          ? state.serviceEntity.resultEntity.response.advice
-                          : [],
-                      description:
-                          state.serviceEntity.resultEntity.response.description,
-                      doctors:
-                          state.serviceEntity.resultEntity.response.doctors,
-                    ),
-                  ],
+                      SizedBox(
+                        height: AppSize.s20.h,
+                      ),
+                      AboutServiceWidget(
+                        advice: state.serviceEntity.resultEntity.response.advice
+                                .isNotEmpty
+                            ? state.serviceEntity.resultEntity.response.advice
+                            : [],
+                        description: state
+                            .serviceEntity.resultEntity.response.description,
+                        doctors:
+                            state.serviceEntity.resultEntity.response.doctors,
+                      ),
+                    ],
+                  ),
                 ),
               GetServiceErrorState() => ErrorsWidget(
                   onPress: () => serviceCubit.getService(),
