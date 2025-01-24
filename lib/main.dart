@@ -74,13 +74,9 @@ Future<void> main() async {
   AppConstants.expireToken =
       CacheHelper.get(key: AppStrings.cachedExpireToken) ?? '';
   AppConstants.type = CacheHelper.get(key: AppStrings.cachedType) ?? '';
-  runApp(
-    DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => (EasyLocalization(
-            supportedLocales: L10n.all,
-            path: 'assets/languages',
-            fallbackLocale: L10n.all[0],
-            child: const DoctorAckApp()))),
-  );
+  runApp(EasyLocalization(
+      supportedLocales: L10n.all,
+      path: 'assets/languages',
+      fallbackLocale: L10n.all[0],
+      child: const DoctorAckApp()));
 }
