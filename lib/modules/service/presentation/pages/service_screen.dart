@@ -409,38 +409,24 @@ class _ServiceClinicScreenState extends State<ServiceClinicScreen> {
                                                       .response
                                                       .discount !=
                                                   0.0,
-                                              child: Positioned(
-                                                top: AppSize.s0,
-                                                right: AppSize.s2,
-                                                child: Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    SvgPictureCustom(
-                                                      assetsName: IconAssets
-                                                          .rectangleDisc,
-                                                      color: null,
-                                                      height: AppSize.s28.h,
-                                                      width: AppSize.s60.w,
-                                                    ),
-                                                    Positioned(
-                                                      top: AppSize.s4,
-                                                      child: TextCustom(
-                                                        text:
-                                                            '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
-                                                        textStyle: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize:
-                                                              FontSize.s12,
-                                                          fontFamily:
-                                                              'SF Pro Text',
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          height: 0,
-                                                          letterSpacing: -0.24,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
+                                              child: Container(
+                                                padding: const EdgeInsets.all(
+                                                  8,
+                                                ),
+                                                decoration: const BoxDecoration(
+                                                  color: ColorManager.brown,
+                                                ),
+                                                child: TextCustom(
+                                                  text:
+                                                      '${state.serviceEntity.resultEntity.response.discount}% ${LocaleKeys.off.tr()}',
+                                                  textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: FontSize.s12,
+                                                    fontFamily: 'SF Pro Text',
+                                                    fontWeight: FontWeight.w600,
+                                                    height: 0,
+                                                    letterSpacing: -0.24,
+                                                  ),
                                                 ),
                                               ),
                                             ),
