@@ -56,9 +56,19 @@ class PaymentCubit extends Cubit<PaymentState> {
       emit(PaymentIntentSuccessState());
 
       //STEP 2: Initialize Payment Sheet
+
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
+                  googlePay: PaymentSheetGooglePay(
+                    merchantCountryCode: "AE",
+                    currencyCode: "AED",
+                    testEnv: true,
+                    amount: price,
+                  ),
+                  applePay: const PaymentSheetApplePay(
+                    merchantCountryCode: "AE",
+                  ),
                   customFlow: false,
                   // billingDetails: const BillingDetails(
                   //     name: 'Ahmed Emad',
@@ -95,6 +105,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       await Stripe.instance
           .presentPaymentSheet(
               // options: const PaymentSheetPresentOptions(timeout: 1200000)
+
               )
           .then((value) async {
         // await Stripe.instance.confirmPaymentSheetPayment().then((value) {

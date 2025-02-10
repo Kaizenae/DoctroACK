@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:device_preview/device_preview.dart';
 import 'package:doctor_ack/core/controller/notification_cubit/notification_cubit.dart';
 import 'package:doctor_ack/core/general_controllers/location_controller/location_cubit.dart';
 import 'package:doctor_ack/core/utils/color_manager.dart';
