@@ -46,6 +46,8 @@ Future<void> main() async {
   await dotenv.load(fileName: "assets/.env");
   Stripe.publishableKey = dotenv.env['STRIPE_PUBLIC']!;
   Stripe.merchantIdentifier = 'DoctorAck';
+  Stripe.instance.applySettings();
+
   await Stripe.instance.applySettings();
   await di.init();
   await CacheHelper.init();

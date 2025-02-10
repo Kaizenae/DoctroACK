@@ -94,6 +94,8 @@
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
+	<key>NSAppleMerchantIdentifier</key>
+	<string>DoctorAck</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
