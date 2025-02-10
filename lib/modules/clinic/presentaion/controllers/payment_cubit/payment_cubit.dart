@@ -1,4 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+
+import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -60,15 +62,16 @@ class PaymentCubit extends Cubit<PaymentState> {
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
+                  applePay: Platform.isIOS
+                      ? const PaymentSheetApplePay(
+                          merchantCountryCode: 'AE',
+                        )
+                      : null,
                   googlePay: PaymentSheetGooglePay(
-                    merchantCountryCode: "AE",
-                    currencyCode: "AED",
-                    testEnv: true,
-                    amount: price,
-                  ),
-                  applePay: const PaymentSheetApplePay(
-                    merchantCountryCode: "AE",
-                  ),
+                      merchantCountryCode: 'AE',
+                      amount: price.toString(),
+                      currencyCode: 'AED',
+                      testEnv: true),
                   customFlow: false,
                   // billingDetails: const BillingDetails(
                   //     name: 'Ahmed Emad',
@@ -105,7 +108,6 @@ class PaymentCubit extends Cubit<PaymentState> {
       await Stripe.instance
           .presentPaymentSheet(
               // options: const PaymentSheetPresentOptions(timeout: 1200000)
-
               )
           .then((value) async {
         // await Stripe.instance.confirmPaymentSheetPayment().then((value) {
