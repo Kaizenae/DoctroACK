@@ -65,6 +65,7 @@ class PaymentCubit extends Cubit<PaymentState> {
                   applePay: Platform.isIOS
                       ? const PaymentSheetApplePay(
                           merchantCountryCode: 'AE',
+                          buttonType: PlatformButtonType.buy,
                         )
                       : null,
                   googlePay: PaymentSheetGooglePay(

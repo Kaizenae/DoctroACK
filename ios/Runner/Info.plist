@@ -95,7 +95,7 @@
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
 	<key>NSAppleMerchantIdentifier</key>
-	<string>DoctorAck</string>
+	<string>merchant.com.doctorack.DoctorAck</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
