@@ -97,4 +97,6 @@ class EndPoints {
   static const String blockTimeEndpoint = '${odooBaseUrl}block_time';
   static const String editServiceEndpoint = '${odooBaseUrl}edit_service';
   static const String editBankEndpoint = '${odooBaseUrl}edit_bank_details';
+  static const String getNotificationsEndpoint =
+      '${odooBaseUrl}fetch_notifications';
 }
