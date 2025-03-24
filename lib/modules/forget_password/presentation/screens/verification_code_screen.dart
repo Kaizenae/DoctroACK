@@ -40,7 +40,7 @@ class VerificationCodeScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is VerifyOTPSuccessState) {
                   if (isRegister) {
-                    navigator(context, Routes.loginRoute);
+                    navigatorAndRemove(context, Routes.loginRoute);
                     showToast(context,
                         message: LocaleKeys.toastOTPVerified.tr(),
                         type: MessageType.success);

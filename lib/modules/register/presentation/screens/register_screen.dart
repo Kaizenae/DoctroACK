@@ -31,6 +31,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
+  final GlobalKey<FormState> _registerFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               showToast(context,
                   message: LocaleKeys.pleaseCheckEmail.tr(),
                   type: MessageType.success);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return VerificationCodeScreen(
                   isRegister: true,
                   email: emailController.text,
@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Form(
-                    key: registerCubit.formKey,
+                    key: _registerFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -230,7 +230,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           color: ColorManager.white,
                                           fontSize: FontSize.s18),
                                       onPressed: () {
-                                        if (registerCubit.formKey.currentState!
+                                        if (_registerFormKey.currentState!
                                             .validate()) {
                                           registerCubit.registerFun(
                                             email: emailController.text,

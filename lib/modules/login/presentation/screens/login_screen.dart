@@ -18,8 +18,15 @@ import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 import '../controller/login_cubit.dart';
 import '../controller/login_state.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  GlobalKey<FormState> loginFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,7 @@ class LoginScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(AppPadding.p16),
                 child: Form(
-                  key: loginCubit.formKey,
+                  key: loginFormKey,
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
@@ -173,11 +180,10 @@ class LoginScreen extends StatelessWidget {
                                       width: context.width / 1.3,
                                       fontWeight: FontWeight.w700,
                                       onPressed: () {
-                                        if (loginCubit.formKey.currentState!
+                                        if (loginFormKey.currentState!
                                             .validate()) {
                                           loginCubit.loginFun();
-                                          loginCubit.formKey.currentState
-                                              ?.reset();
+                                          loginFormKey.currentState?.reset();
                                         }
                                       },
                                     ),
