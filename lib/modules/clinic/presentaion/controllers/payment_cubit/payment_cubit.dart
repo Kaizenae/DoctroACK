@@ -30,6 +30,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
+        "payment_method_types": ["card", "apple_pay"],
         "automatic_payment_methods[enabled]": "true",
       };
 
