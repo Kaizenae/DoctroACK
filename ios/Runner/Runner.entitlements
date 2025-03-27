@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.in-app-payments</key>
 	<array>
-    	<string>merchant.com.doctorack.DoctorAck</string>
+    		<string>merchant.com.doctorack.DoctorAck</string>
 	</array>
 
 </dict>
