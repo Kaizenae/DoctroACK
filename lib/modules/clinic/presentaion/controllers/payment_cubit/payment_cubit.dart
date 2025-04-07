@@ -68,7 +68,10 @@ class PaymentCubit extends Cubit<PaymentState> {
                           buttonType: PlatformButtonType.buy,
                           cartItems: [
                             ApplePayCartSummaryItem.immediate(
-                                label: "DoctorAck", amount: price.toString())
+                              label: "DoctorAck",
+                              amount: (int.parse(price).toDouble() / 100)
+                                  .toString(),
+                            ),
                           ],
                         )
                       : null,
