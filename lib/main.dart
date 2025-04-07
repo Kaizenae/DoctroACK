@@ -45,7 +45,7 @@ Future<void> main() async {
   //Load our .env file that contains our Stripe Secret key
   await dotenv.load(fileName: "assets/.env");
   Stripe.publishableKey = dotenv.env['STRIPE_PUBLIC']!;
-  Stripe.merchantIdentifier = 'com.doctorack.DoctorAck';
+  Stripe.merchantIdentifier = 'merchant.com.doctorack.DoctorAck';
   Stripe.instance.applySettings();
 
   await Stripe.instance.applySettings();

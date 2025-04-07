@@ -30,7 +30,6 @@ class PaymentCubit extends Cubit<PaymentState> {
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
-        "payment_method_types": ["card", "apple_pay"],
         "automatic_payment_methods[enabled]": "true",
       };
 
@@ -64,9 +63,13 @@ class PaymentCubit extends Cubit<PaymentState> {
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   applePay: Platform.isIOS
-                      ? const PaymentSheetApplePay(
+                      ? PaymentSheetApplePay(
                           merchantCountryCode: 'AE',
                           buttonType: PlatformButtonType.buy,
+                          cartItems: [
+                            ApplePayCartSummaryItem.immediate(
+                                label: "DoctorAck", amount: price.toString())
+                          ],
                         )
                       : null,
                   googlePay: PaymentSheetGooglePay(
